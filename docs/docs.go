@@ -25,6 +25,43 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/authenticate": {
+            "post": {
+                "description": "Control user credential and generate a new Json Web Token",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Can allow user to login and get an JWT.",
+                "parameters": [
+                    {
+                        "description": "UserLogin object",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UserLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            }
+        },
         "/healthy": {
             "get": {
                 "description": "Check if the current API is alive",
@@ -252,6 +289,19 @@ var doc = `{
                 "zip": {
                     "type": "string",
                     "example": "59000"
+                }
+            }
+        },
+        "models.UserLogin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "henri.martin@qimpl.fr"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "MyPassword"
                 }
             }
         }

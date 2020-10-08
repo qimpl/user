@@ -24,3 +24,9 @@ type User struct {
 	CreatedAt    time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt    time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }
+
+//UserLogin contain only user credentials used to authentication
+type UserLogin struct {
+	Email    string `json:"email" example:"henri.martin@qimpl.fr"`
+	Password string `json:"password" example:"MyPassword"`
+}
