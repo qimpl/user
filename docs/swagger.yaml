@@ -2,7 +2,7 @@ basePath: /api/v1
 info:
   contact: {}
   license: {}
-  title: APP_NAME API
+  title: authentication API
   version: 0.1.0
 paths:
   /healthy:

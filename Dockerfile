@@ -2,10 +2,10 @@ FROM golang:1.14-alpine AS build
 WORKDIR /build
 COPY . .
 RUN go get .
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o APP_NAME .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o authentication .
 
 FROM scratch
 WORKDIR /bin
-COPY --from=build /build/APP_NAME .
+COPY --from=build /build/authentication .
 EXPOSE 8000
-CMD ["./APP_NAME"]
+CMD ["./authentication"]

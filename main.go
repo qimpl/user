@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 
-	_ "github.com/qimpl/APP_NAME/docs"
-	"github.com/qimpl/APP_NAME/router"
+	_ "github.com/qimpl/authentication/docs"
+	"github.com/qimpl/authentication/router"
 
 	"github.com/joho/godotenv"
 )
 
-// @title APP_NAME API
+// @title authentication API
 // @version 0.1.0
 // @BasePath /api/v1
 func main() {

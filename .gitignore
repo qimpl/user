@@ -3,5 +3,5 @@ docker-compose.override.yml
 .env
 
 # Build
-APP_NAME
+authentication
 /*.exe

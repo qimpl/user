@@ -63,7 +63,7 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "/api/v1",
 	Schemes:     []string{},
-	Title:       "APP_NAME API",
+	Title:       "authentication API",
 	Description: "",
 }
 

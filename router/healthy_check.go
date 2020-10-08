@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/qimpl/APP_NAME/handlers"
+	"github.com/qimpl/authentication/handlers"
 
 	"github.com/gorilla/mux"
 )
