@@ -1,0 +1,7 @@
+# Docker
+docker-compose.override.yml
+.env
+
+# Build
+APP_NAME
+/*.exe

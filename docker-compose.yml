@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: "api-APP_NAME"
+    image: golang:latest
+    working_dir: /api
+    volumes:
+      - ".:/api"
+    entrypoint: ["./entrypoint.sh", "reflex", "-c", "reflex.conf"]
+
+  db:
+    container_name: "db-APP_NAME"
+    image: postgres:10-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+
+  adminer:
+    container_name: "adminer-APP_NAME"
+    image: adminer
+    restart: always
+
+volumes:
+  postgres:

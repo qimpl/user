@@ -1,0 +1,21 @@
+basePath: /api/v1
+info:
+  contact: {}
+  license: {}
+  title: APP_NAME API
+  version: 0.1.0
+paths:
+  /healthy:
+    get:
+      description: Check if the current API is alive
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Healthy Check
+swagger: "2.0"
