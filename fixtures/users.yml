@@ -1,0 +1,53 @@
+- id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
+  first_name: Jean
+  last_name: Dupond
+  email: jean.dupond@qimpl.io
+  birthdate: 1999-01-08
+  country: FR
+  state: Haut-De-France
+  street_number: 18
+  street: Boulevard de la liberté
+  city: Douai
+  zip: 59500
+  is_owner: true
+  password: jean
+
+- id: 2e202ea5-d635-4c2f-9bde-2f358ec98e94
+  first_name: Michel
+  last_name: Martin
+  email: michel.martind@qimpl.io
+  birthdate: 1965-04-23
+  country: FR
+  state: Haut-De-France
+  street_number: 3
+  street: rue du molinel
+  city: Auby
+  zip: 59950
+  password: michel
+
+- id: 7c1a2a5f-5deb-4cb1-a020-75357827606b
+  first_name: Marie
+  last_name: Masson
+  email: marie.masson@qimpl.io
+  birthdate: 1974-12-03
+  country: FR
+  state: Haut-De-France
+  street_number: 105
+  street: rue du petit faubourg
+  city: Wavrin
+  zip: 59136
+  password: marie
+
+- id: 27fd09df-794d-4f33-8a8e-358f42172a78
+  first_name: Nicolas
+  last_name: Henry
+  email: nicolas.henry@qimpl.io
+  birthdate: 2002-10-06
+  country: FR
+  state: Haut-De-France
+  street_number: 1
+  street: rue des acacias
+  city: Seclin
+  zip: 59113
+  is_owner: true
+  password: nicolas

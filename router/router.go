@@ -19,6 +19,7 @@ func CreateRouter() {
 	APIRouter.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	createHealthyRouter(APIRouter)
+	createUserRouter(APIRouter)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -28,6 +29,9 @@ func CreateRouter() {
 	c := cors.New(cors.Options{
 		AllowedMethods: []string{
 			http.MethodGet,
+			http.MethodPost,
+			http.MethodPut,
+			http.MethodDelete,
 		},
 	})
 
