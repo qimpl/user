@@ -39,12 +39,45 @@ definitions:
         example: "59000"
         type: string
     type: object
+  models.UserLogin:
+    properties:
+      email:
+        example: henri.martin@qimpl.fr
+        type: string
+      password:
+        example: MyPassword
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
   title: authentication API
   version: 0.1.0
 paths:
+  /authenticate:
+    post:
+      description: Control user credential and generate a new Json Web Token
+      parameters:
+      - description: UserLogin object
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: body
+      summary: Can allow user to login and get an JWT.
+      tags:
+      - Authentication
   /healthy:
     get:
       description: Check if the current API is alive

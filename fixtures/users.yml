@@ -2,6 +2,7 @@
   first_name: Jean
   last_name: Dupond
   email: jean.dupond@qimpl.io
+  password: $2a$10$3aoVcnS7m8yYVDc/sDdCROhaQcU9yhr4LjVEGe8WyMOrCZaLP68sG
   birthdate: 1999-01-08
   country: FR
   state: Haut-De-France
@@ -10,12 +11,12 @@
   city: Douai
   zip: 59500
   is_owner: true
-  password: jean
 
 - id: 2e202ea5-d635-4c2f-9bde-2f358ec98e94
   first_name: Michel
   last_name: Martin
   email: michel.martind@qimpl.io
+  password: $2a$10$w9kHL7Su3of2udm2Hgqc4ue1vVaU9mdU44dGbmA3VCSpBxqVh1kVW
   birthdate: 1965-04-23
   country: FR
   state: Haut-De-France
@@ -23,12 +24,12 @@
   street: rue du molinel
   city: Auby
   zip: 59950
-  password: michel
 
 - id: 7c1a2a5f-5deb-4cb1-a020-75357827606b
   first_name: Marie
   last_name: Masson
   email: marie.masson@qimpl.io
+  password: $2a$10$AXzl/KOCFAI8B/NhS/21OOrq64bjpHpPdh.//T1c4TCqT9wHySQZC
   birthdate: 1974-12-03
   country: FR
   state: Haut-De-France
@@ -36,12 +37,12 @@
   street: rue du petit faubourg
   city: Wavrin
   zip: 59136
-  password: marie
 
 - id: 27fd09df-794d-4f33-8a8e-358f42172a78
   first_name: Nicolas
   last_name: Henry
   email: nicolas.henry@qimpl.io
+  password: $2a$10$zIa/gP5gaWmJkhxK9f86FedPb8c9zcqst6y1JN9.GtNauffOtt94O
   birthdate: 2002-10-06
   country: FR
   state: Haut-De-France
@@ -50,4 +51,3 @@
   city: Seclin
   zip: 59113
   is_owner: true
-  password: nicolas
