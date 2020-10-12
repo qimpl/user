@@ -1,4 +1,44 @@
 basePath: /api/v1
+definitions:
+  models.User:
+    properties:
+      birthdate:
+        example: "1999-10-05"
+        type: string
+      city:
+        example: Lille
+        type: string
+      country:
+        example: FR
+        type: string
+      email:
+        example: henri.martin@qimpl.fr
+        type: string
+      first_name:
+        example: Henri
+        type: string
+      is_owner:
+        example: true
+        type: boolean
+      last_name:
+        example: Martin
+        type: string
+      password:
+        example: MyPassword
+        type: string
+      state:
+        example: Haut-De-France
+        type: string
+      street:
+        example: Rue des peupliers
+        type: string
+      street_number:
+        example: "1"
+        type: string
+      zip:
+        example: "59000"
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
@@ -18,4 +58,106 @@ paths:
           schema:
             type: string
       summary: Healthy Check
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: User object
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: body
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: body
+      summary: Create user
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update an user
+      parameters:
+      - description: User object
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: body
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: body
+      summary: Update User
+      tags:
+      - Users
+  /user/{user_id}:
+    delete:
+      description: Delete user data from database
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: body
+      summary: Delete user by his id
+      tags:
+      - Users
+    get:
+      description: Get user object data from database
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: body
+      summary: Get user by his id
+      tags:
+      - Users
 swagger: "2.0"

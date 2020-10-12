@@ -5,6 +5,8 @@ services:
     container_name: "api-authentication"
     image: golang:latest
     working_dir: /api
+    env_file:
+      - .env
     volumes:
       - ".:/api"
     entrypoint: ["./entrypoint.sh", "reflex", "-c", "reflex.conf"]

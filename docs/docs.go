@@ -44,6 +44,216 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/user": {
+            "put": {
+                "description": "Update an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "description": "User object",
+                        "name": "User",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create user",
+                "parameters": [
+                    {
+                        "description": "User object",
+                        "name": "User",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}": {
+            "get": {
+                "description": "Get user object data from database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by his id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete user data from database",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete user by his id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "birthdate": {
+                    "type": "string",
+                    "example": "1999-10-05"
+                },
+                "city": {
+                    "type": "string",
+                    "example": "Lille"
+                },
+                "country": {
+                    "type": "string",
+                    "example": "FR"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "henri.martin@qimpl.fr"
+                },
+                "first_name": {
+                    "type": "string",
+                    "example": "Henri"
+                },
+                "is_owner": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Martin"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "MyPassword"
+                },
+                "state": {
+                    "type": "string",
+                    "example": "Haut-De-France"
+                },
+                "street": {
+                    "type": "string",
+                    "example": "Rue des peupliers"
+                },
+                "street_number": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "zip": {
+                    "type": "string",
+                    "example": "59000"
+                }
+            }
         }
     }
 }`
