@@ -21,15 +21,16 @@ import (
 // @Failure 400 body {string} string
 // @Router /user/{user_id} [get]
 func GetUserByID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	user, err := db.GetUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("An error occured during user retrieval")
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
 
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
 }
 
@@ -40,15 +41,18 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 // @Accept json
 // @Param User body models.User true "User object"
 // @Produce json
-// @Success 200 body models.User User
+// @Success 201 body models.User User
 // @Failure 400 body {string} string
 // @Failure 422 body {string} string
 // @Router /user [post]
 func CreateUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	var bodyUser models.User
 
 	if err := json.NewDecoder(r.Body).Decode(&bodyUser); err != nil {
-		http.Error(w, "Malformed body", http.StatusUnprocessableEntity)
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		var unprocessableEntity *models.UnprocessableEntity
+		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
 
 		return
 	}
@@ -56,12 +60,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	user, err := db.CreateUser(&bodyUser)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("An error occured during user creation")
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user creation"))
 
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(user)
 }
 
@@ -77,10 +82,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 // @Failure 422 body {string} string
 // @Router /user [put]
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	var bodyUser models.User
 
 	if err := json.NewDecoder(r.Body).Decode(&bodyUser); err != nil {
-		http.Error(w, "Malformed body", http.StatusUnprocessableEntity)
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		var unprocessableEntity *models.UnprocessableEntity
+		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
 
 		return
 	}
@@ -88,12 +96,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	_, err := db.UpdateUser(&bodyUser)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("An error occured during user update")
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
 
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(bodyUser)
 
 }
@@ -103,17 +111,18 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 // @Description Delete user data from database
 // @Tags Users
 // @Param user_id query string true "User ID"
-// @Success 200 body {string} string
+// @Success 204 ""
 // @Failure 400 body {string} string
 // @Router /user/{user_id} [delete]
 func DeleteUserByID(w http.ResponseWriter, r *http.Request) {
 	err := db.DeleteUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
 	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("An error occured during user deletion")
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user deletion"))
 
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode("User successfully deleted")
+	w.WriteHeader(http.StatusNoContent)
 }
