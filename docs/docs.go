@@ -151,8 +151,8 @@ var doc = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "type": "body"
                         }
@@ -222,12 +222,7 @@ var doc = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "body"
-                        }
-                    },
+                    "204": {},
                     "400": {
                         "description": "Bad Request",
                         "schema": {
