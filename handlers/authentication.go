@@ -21,7 +21,8 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	var userLogin models.UserLogin
 
 	if err := json.NewDecoder(r.Body).Decode(&userLogin); err != nil {
-		http.Error(w, "Malformed body", http.StatusUnprocessableEntity)
+		var unprocessableEntity *models.UnprocessableEntity
+		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
 
 		return
 	}
@@ -29,7 +30,8 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	tokenHash, loginErr := services.Login(userLogin.Email, userLogin.Password)
 	if loginErr != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("An error occured during user authentication")
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user authentication"))
 
 		return
 	}
