@@ -10,7 +10,7 @@ func createUserRouter(router *mux.Router) {
 	userRouter := router.PathPrefix("/user").Subrouter()
 
 	userRouter.
-		HandleFunc("/{user_id}", handlers.GetUserByID).
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.GetUserByID).
 		Methods("GET")
 
 	userRouter.
@@ -22,6 +22,18 @@ func createUserRouter(router *mux.Router) {
 		Methods("PUT")
 
 	userRouter.
-		HandleFunc("/{user_id}", handlers.DeleteUserByID).
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.DeleteUserByID).
 		Methods("DELETE")
+
+	userRouter.
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/reset/password", handlers.ResetPassword).
+		Methods("PUT")
+
+	userRouter.
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/validate", handlers.ValidateUserAccount).
+		Methods("PUT")
+
+	userRouter.
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/desactivate", handlers.DesactivateUserAccount).
+		Methods("PUT")
 }

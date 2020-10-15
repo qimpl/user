@@ -17,6 +17,9 @@ definitions:
       first_name:
         example: Henri
         type: string
+      is_enabled:
+        example: true
+        type: boolean
       is_owner:
         example: true
         type: boolean
@@ -48,6 +51,11 @@ definitions:
         example: MyPassword
         type: string
     type: object
+  models.UserResetPasswordBody:
+    properties:
+      password:
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
@@ -69,6 +77,10 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
           schema:
             type: body
         "422":
@@ -113,11 +125,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: body
+            type: string
         "422":
           description: Unprocessable Entity
           schema:
-            type: body
+            type: string
       summary: Create user
       tags:
       - Users
@@ -142,11 +154,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: body
+            type: string
         "422":
           description: Unprocessable Entity
           schema:
-            type: body
+            type: string
       summary: Update User
       tags:
       - Users
@@ -164,7 +176,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: body
+            type: string
       summary: Delete user by his id
       tags:
       - Users
@@ -186,8 +198,67 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: body
+            type: string
       summary: Get user by his id
+      tags:
+      - Users
+  /user/{user_id}/desactivate:
+    put:
+      description: Update user is_enabled field into database
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Desactivate user account by his id.
+      tags:
+      - Users
+  /user/{user_id}/reset/password:
+    put:
+      description: Update user password field into database
+      parameters:
+      - description: UserResetPasswordBody object
+        in: body
+        name: UserResetPasswordBody
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserResetPasswordBody'
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+      summary: Reset user password by his id
+      tags:
+      - Users
+  /user/{user_id}/validate:
+    put:
+      description: Update user is_enabled field into database
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Validate user account by his id.
       tags:
       - Users
 swagger: "2.0"

@@ -53,6 +53,12 @@ var doc = `{
                             "type": "body"
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
@@ -116,13 +122,13 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
                         }
                     }
                 }
@@ -160,13 +166,13 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
                         }
                     }
                 }
@@ -201,7 +207,7 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
                         }
                     }
                 }
@@ -226,7 +232,96 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "body"
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}/desactivate": {
+            "put": {
+                "description": "Update user is_enabled field into database",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Desactivate user account by his id.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}/reset/password": {
+            "put": {
+                "description": "Update user password field into database",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Reset user password by his id",
+                "parameters": [
+                    {
+                        "description": "UserResetPasswordBody object",
+                        "name": "UserResetPasswordBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UserResetPasswordBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}/validate": {
+            "put": {
+                "description": "Update user is_enabled field into database",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Validate user account by his id.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -256,6 +351,10 @@ var doc = `{
                 "first_name": {
                     "type": "string",
                     "example": "Henri"
+                },
+                "is_enabled": {
+                    "type": "boolean",
+                    "example": true
                 },
                 "is_owner": {
                     "type": "boolean",
@@ -297,6 +396,14 @@ var doc = `{
                 "password": {
                     "type": "string",
                     "example": "MyPassword"
+                }
+            }
+        },
+        "models.UserResetPasswordBody": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
                 }
             }
         }

@@ -24,6 +24,7 @@ CREATE TABLE "users" (
     "city" varchar(64) NOT NULL,
     "zip" varchar(20) NOT NULL,
     "is_owner" bool DEFAULT FALSE NOT NULL,
+    "is_enabled" bool DEFAULT FALSE NOT NULL,
     "created_at" timestamp DEFAULT CURRENT_TIMESTAMP,
     "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP
 );
