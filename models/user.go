@@ -21,6 +21,7 @@ type User struct {
 	Zip          string    `json:"zip" example:"59000"`
 	IsOwner      bool      `json:"is_owner,omitempty" example:"true"`
 	Password     string    `json:"password,omitempty" example:"MyPassword"`
+	IsEnabled    bool      `json:"is_enabled,omitempty" example:"true"`
 	CreatedAt    time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt    time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }
@@ -29,4 +30,9 @@ type User struct {
 type UserLogin struct {
 	Email    string `json:"email" example:"henri.martin@qimpl.fr"`
 	Password string `json:"password" example:"MyPassword"`
+}
+
+// UserResetPasswordBody is used as struct for user reset password
+type UserResetPasswordBody struct {
+	Password string `json:"password"`
 }

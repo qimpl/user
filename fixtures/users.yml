@@ -11,6 +11,7 @@
   city: Douai
   zip: 59500
   is_owner: true
+  is_enabled: true
 
 - id: 2e202ea5-d635-4c2f-9bde-2f358ec98e94
   first_name: Michel
@@ -24,6 +25,7 @@
   street: rue du molinel
   city: Auby
   zip: 59950
+  is_owner: true
 
 - id: 7c1a2a5f-5deb-4cb1-a020-75357827606b
   first_name: Marie
@@ -37,6 +39,7 @@
   street: rue du petit faubourg
   city: Wavrin
   zip: 59136
+  is_enabled: true
 
 - id: 27fd09df-794d-4f33-8a8e-358f42172a78
   first_name: Nicolas
