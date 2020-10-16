@@ -15,12 +15,14 @@ import (
 // @Param UserLogin body models.UserLogin true "UserLogin object"
 // @Produce json
 // @Success 200 body {string} string
-// @Failure 422 body {string} string
+// @Failure 400 body models.ErrorResponse
+// @Failure 422 body models.ErrorResponse
 // @Router /authenticate [post]
 func Authenticate(w http.ResponseWriter, r *http.Request) {
 	var userLogin models.UserLogin
-
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewDecoder(r.Body).Decode(&userLogin); err != nil {
+		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
 
@@ -36,6 +38,5 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(tokenHash)
 }
