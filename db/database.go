@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/go-pg/pg/v9"
+	"github.com/go-pg/pg/v10"
 	// Autoload .env file
 	_ "github.com/joho/godotenv/autoload"
 )
