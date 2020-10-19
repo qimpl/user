@@ -69,3 +69,26 @@ func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
 	}
 	return nil
 }
+
+// ResetUserPassword update user password into database.
+func ResetUserPassword(userID uuid.UUID, userResetPassword *models.UserResetPasswordBody) error {
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(userResetPassword.Password), bcrypt.DefaultCost)
+	user, _ := GetUserByID(userID)
+
+	user.Password = string(hashedPassword)
+
+	if _, err := Db.Model(user).Set("password = ?", user.Password).Where("id = ?", user.ID).Update(); err != nil {
+		return err
+	}
+	return nil
+}
+
+// UpdateUserAccountStatus activate or desactivate & update is_enabled field into database
+func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
+	user, _ := GetUserByID(userID)
+
+	if _, err := Db.Model(user).Set("is_enabled = ?", state).Where("id = ?", user.ID).Update(); err != nil {
+		return err
+	}
+	return nil
+}
