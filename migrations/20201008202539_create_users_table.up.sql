@@ -19,7 +19,6 @@ CREATE TABLE "users" (
     "birthdate" timestamp NOT NULL,
     "country" varchar(2) NOT NULL,
     "state" varchar(50),
-    "street_number" varchar(20) NOT NULL,
     "street" varchar(100) NOT NULL,
     "city" varchar(64) NOT NULL,
     "zip" varchar(20) NOT NULL,
