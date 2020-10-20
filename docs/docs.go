@@ -376,10 +376,6 @@ var doc = `{
                     "type": "string",
                     "example": "Rue des peupliers"
                 },
-                "street_number": {
-                    "type": "string",
-                    "example": "1"
-                },
                 "zip": {
                     "type": "string",
                     "example": "59000"
