@@ -6,8 +6,7 @@
   birthdate: 1999-01-08
   country: FR
   state: Haut-De-France
-  street_number: 18
-  street: Boulevard de la liberté
+  street: 18 Boulevard de la liberté
   city: Douai
   zip: 59500
   is_owner: true
@@ -21,8 +20,7 @@
   birthdate: 1965-04-23
   country: FR
   state: Haut-De-France
-  street_number: 3
-  street: rue du molinel
+  street: 3 rue du molinel
   city: Auby
   zip: 59950
   is_owner: true
@@ -35,8 +33,7 @@
   birthdate: 1974-12-03
   country: FR
   state: Haut-De-France
-  street_number: 105
-  street: rue du petit faubourg
+  street: 105 rue du petit faubourg
   city: Wavrin
   zip: 59136
   is_enabled: true
@@ -49,8 +46,7 @@
   birthdate: 2002-10-06
   country: FR
   state: Haut-De-France
-  street_number: 1
-  street: rue des acacias
+  street: 1 rue des acacias
   city: Seclin
   zip: 59113
   is_owner: true
