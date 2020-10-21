@@ -130,35 +130,6 @@ paths:
       summary: Create user
       tags:
       - Users
-    put:
-      consumes:
-      - application/json
-      description: Update an user
-      parameters:
-      - description: User object
-        in: body
-        name: User
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: body
-        "400":
-          description: Bad Request
-          schema:
-            type: string
-        "422":
-          description: Unprocessable Entity
-          schema:
-            type: string
-      summary: Update User
-      tags:
-      - Users
   /user/{user_id}:
     delete:
       description: Delete user data from database
@@ -197,6 +168,35 @@ paths:
           schema:
             type: string
       summary: Get user by his id
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update an user
+      parameters:
+      - description: User object
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+      summary: Update User by his ID
       tags:
       - Users
   /user/{user_id}/desactivate:

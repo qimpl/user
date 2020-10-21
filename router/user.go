@@ -18,7 +18,7 @@ func createUserRouter(router *mux.Router) {
 		Methods("POST")
 
 	userRouter.
-		HandleFunc("", handlers.UpdateUser).
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.UpdateUserByID).
 		Methods("PUT")
 
 	userRouter.

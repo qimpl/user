@@ -70,8 +70,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-// UpdateUser update an user
-// @Summary Update User
+// UpdateUserByID update an user from a given ID
+// @Summary Update User by his ID
 // @Description Update an user
 // @Tags Users
 // @Accept json
@@ -80,12 +80,12 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 // @Success 200 body models.User User
 // @Failure 400 {string} models.ErrorResponse
 // @Failure 422 {string} models.ErrorResponse
-// @Router /user [put]
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
+// @Router /user/{user_id} [put]
+func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var bodyUser models.User
+	var user *models.User
 
-	if err := json.NewDecoder(r.Body).Decode(&bodyUser); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
@@ -93,8 +93,8 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := db.UpdateUser(&bodyUser)
-	if err != nil {
+	user.ID = uuid.MustParse(mux.Vars(r)["user_id"])
+	if _, err := db.UpdateUserByID(user); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
@@ -102,7 +102,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(bodyUser)
+	json.NewEncoder(w).Encode(user)
 
 }
 
