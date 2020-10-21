@@ -30,9 +30,9 @@ func CreateUser(user *models.User) (*models.User, error) {
 	return user, nil
 }
 
-// UpdateUser search & update an user.
-func UpdateUser(user *models.User) (*models.User, error) {
-	if _, err := Db.Model(user).Update(); err != nil {
+// UpdateUserByID search & update an user by his ID.
+func UpdateUserByID(user *models.User) (*models.User, error) {
+	if _, err := Db.Model(user).Where("id = ?", user.ID).Update(); err != nil {
 		return nil, err
 	}
 	return user, nil
