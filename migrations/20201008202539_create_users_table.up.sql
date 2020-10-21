@@ -17,7 +17,7 @@ CREATE TABLE "users" (
     "email" varchar(100) NOT NULL UNIQUE,
     "password" varchar(100) NOT NULL,
     "birthdate" timestamp NOT NULL,
-    "country" varchar(2) NOT NULL,
+    "country" varchar(20) NOT NULL,
     "state" varchar(50),
     "street" varchar(100) NOT NULL,
     "city" varchar(64) NOT NULL,
