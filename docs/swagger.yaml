@@ -87,19 +87,6 @@ paths:
       summary: Can allow user to login and get an JWT.
       tags:
       - Authentication
-  /healthy:
-    get:
-      description: Check if the current API is alive
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-        "404":
-          description: Not Found
-          schema:
-            type: string
-      summary: Healthy Check
   /user:
     post:
       consumes:

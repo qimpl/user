@@ -68,26 +68,6 @@ var doc = `{
                 }
             }
         },
-        "/healthy": {
-            "get": {
-                "description": "Check if the current API is alive",
-                "summary": "Healthy Check",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/user": {
             "post": {
                 "description": "Create a new user",
