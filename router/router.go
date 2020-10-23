@@ -18,7 +18,6 @@ func CreateRouter() {
 
 	APIRouter.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
-	createHealthyRouter(APIRouter)
 	createAuthenticationRouter(APIRouter)
 	createUserRouter(APIRouter)
 
