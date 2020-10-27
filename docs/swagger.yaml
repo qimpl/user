@@ -17,6 +17,9 @@ definitions:
       first_name:
         example: Henri
         type: string
+      is_admin:
+        example: true
+        type: boolean
       is_enabled:
         example: true
         type: boolean

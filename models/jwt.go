@@ -12,6 +12,7 @@ type Token struct {
 	LastName  string    `json:"last_name"`
 	Email     string    `json:"email"`
 	IsOwner   bool      `json:"is_owner"`
+	IsAdmin   bool      `json:"is_admin"`
 	jwt.StandardClaims
 }
 

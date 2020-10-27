@@ -17,6 +17,7 @@ func CreateJwtToken(user *models.User) *models.TokenHash {
 		LastName:  user.LastName,
 		Email:     user.Email,
 		IsOwner:   user.IsOwner,
+		IsAdmin:   user.IsAdmin,
 	}
 
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), claims)
