@@ -332,6 +332,10 @@ var doc = `{
                     "type": "string",
                     "example": "Henri"
                 },
+                "is_admin": {
+                    "type": "boolean",
+                    "example": true
+                },
                 "is_enabled": {
                     "type": "boolean",
                     "example": true

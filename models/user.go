@@ -21,6 +21,7 @@ type User struct {
 	IsOwner   bool      `json:"is_owner,omitempty" example:"true"`
 	Password  string    `json:"password,omitempty" example:"MyPassword"`
 	IsEnabled bool      `json:"is_enabled,omitempty" example:"true"`
+	IsAdmin   bool      `json:"is_admin,omitempty" example:"true"`
 	CreatedAt time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }
