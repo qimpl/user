@@ -17,6 +17,6 @@ require (
 	github.com/swaggo/swag v1.6.7
 	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
 	golang.org/x/net v0.0.0-20201026091529-146b70c837a4 // indirect
-	golang.org/x/sys v0.0.0-20201026173827-119d4633e4d1 // indirect
+	golang.org/x/sys v0.0.0-20201027090413-e1471140ff15 // indirect
 	golang.org/x/tools v0.0.0-20201026223136-e84cfc6dd5ca // indirect
 )
