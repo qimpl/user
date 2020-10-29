@@ -20,6 +20,9 @@ definitions:
       is_admin:
         example: true
         type: boolean
+      is_deleted:
+        example: true
+        type: boolean
       is_enabled:
         example: true
         type: boolean
@@ -187,6 +190,28 @@ paths:
           schema:
             type: string
       summary: Update User by his ID
+      tags:
+      - Users
+  /user/{user_id}/anonymize:
+    put:
+      description: Anonymize user data & set is_deleted boolean to true
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: anonymize user account by his id.
       tags:
       - Users
   /user/{user_id}/desactivate:

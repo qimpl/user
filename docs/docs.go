@@ -218,6 +218,39 @@ var doc = `{
                 }
             }
         },
+        "/user/{user_id}/anonymize": {
+            "put": {
+                "description": "Anonymize user data \u0026 set is_deleted boolean to true",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "anonymize user account by his id.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/{user_id}/desactivate": {
             "put": {
                 "description": "Update user is_enabled field into database",
@@ -333,6 +366,10 @@ var doc = `{
                     "example": "Henri"
                 },
                 "is_admin": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "is_deleted": {
                     "type": "boolean",
                     "example": true
                 },

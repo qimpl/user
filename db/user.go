@@ -32,7 +32,7 @@ func CreateUser(user *models.User) (*models.User, error) {
 
 // UpdateUserByID search & update an user by his ID.
 func UpdateUserByID(user *models.User) error {
-	user, err := GetUserByID(user.ID)
+	_, err := GetUserByID(user.ID)
 	if err != nil {
 		return err
 	}

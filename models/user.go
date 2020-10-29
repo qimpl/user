@@ -18,10 +18,11 @@ type User struct {
 	Street    string    `json:"street" example:"Rue des peupliers"`
 	City      string    `json:"city" example:"Lille"`
 	Zip       string    `json:"zip" example:"59000"`
-	IsOwner   bool      `json:"is_owner,omitempty" example:"true"`
+	IsOwner   bool      `json:"is_owner,omitempty" pg:",use_zero" example:"true"`
 	Password  string    `json:"password,omitempty" example:"MyPassword"`
-	IsEnabled bool      `json:"is_enabled,omitempty" example:"true"`
-	IsAdmin   bool      `json:"is_admin,omitempty" example:"true"`
+	IsEnabled bool      `json:"is_enabled,omitempty" pg:",use_zero" example:"true"`
+	IsAdmin   bool      `json:"is_admin,omitempty" pg:",use_zero" example:"true"`
+	IsDeleted bool      `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	CreatedAt time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }
