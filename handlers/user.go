@@ -6,6 +6,7 @@ import (
 
 	"github.com/qimpl/authentication/db"
 	"github.com/qimpl/authentication/models"
+	"github.com/qimpl/authentication/services"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
@@ -198,5 +199,37 @@ func DesactivateUserAccount(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// AnonymizeUserByID anonymize user data into the database and set is_deleted field to true.
+// @Summary anonymize user account by his id.
+// @Description Anonymize user data & set is_deleted boolean to true
+// @Tags Users
+// @Param user_id query string true "User ID"
+// @Success 204 ""
+// @Failure 400 {string} models.ErrorResponse
+// @Failure 404 {string} models.ErrorResponse
+// @Router /user/{user_id}/anonymize [put]
+func AnonymizeUserByID(w http.ResponseWriter, r *http.Request) {
+	user, err := db.GetUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		var notFound *models.NotFound
+		json.NewEncoder(w).Encode(notFound.GetError("User does not exist"))
+
+		return
+	}
+
+	user = services.AnonymizeUser(user)
+	user.IsDeleted = true
+	if err := db.UpdateUserByID(user); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
+
+		return
+	}
+
 	w.WriteHeader(http.StatusNoContent)
 }

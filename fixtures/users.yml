@@ -37,6 +37,7 @@
   city: Wavrin
   zip: 59136
   is_enabled: true
+  is_deleted: true
 
 - id: 27fd09df-794d-4f33-8a8e-358f42172a78
   first_name: Nicolas
