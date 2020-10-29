@@ -94,7 +94,7 @@ func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.ID = uuid.MustParse(mux.Vars(r)["user_id"])
-	if _, err := db.UpdateUserByID(user); err != nil {
+	if err := db.UpdateUserByID(user); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))

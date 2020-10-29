@@ -31,41 +31,51 @@ func CreateUser(user *models.User) (*models.User, error) {
 }
 
 // UpdateUserByID search & update an user by his ID.
-func UpdateUserByID(user *models.User) (*models.User, error) {
-	if _, err := Db.Model(user).Where("id = ?", user.ID).Update(); err != nil {
-		return nil, err
+func UpdateUserByID(user *models.User) error {
+	user, err := GetUserByID(user.ID)
+	if err != nil {
+		return err
 	}
-	return user, nil
+
+	_, err = Db.Model(user).Where("id = ?", user.ID).Update()
+
+	return err
 }
 
 // DeleteUserByID search & delete an user from a given ID.
 func DeleteUserByID(userID uuid.UUID) error {
-	user := new(models.User)
-	if _, err := Db.Model(user).Where("id = ?", userID).Delete(); err != nil {
+	user, err := GetUserByID(userID)
+	if err != nil {
 		return err
 	}
-	return nil
+
+	_, err = Db.Model(user).Where("id = ?", userID).Delete()
+	return err
 }
 
 // ResetUserPassword update user password into database.
 func ResetUserPassword(userID uuid.UUID, userResetPassword *models.UserResetPasswordBody) error {
-	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(userResetPassword.Password), bcrypt.DefaultCost)
-	user, _ := GetUserByID(userID)
-
-	user.Password = string(hashedPassword)
-
-	if _, err := Db.Model(user).Set("password = ?", user.Password).Where("id = ?", user.ID).Update(); err != nil {
+	user, err := GetUserByID(userID)
+	if err != nil {
 		return err
 	}
-	return nil
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(userResetPassword.Password), bcrypt.DefaultCost)
+	user.Password = string(hashedPassword)
+
+	_, err = Db.Model(user).Set("password = ?", user.Password).Where("id = ?", user.ID).Update()
+
+	return err
 }
 
 // UpdateUserAccountStatus activate or desactivate & update is_enabled field into database
 func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
-	user, _ := GetUserByID(userID)
-
-	if _, err := Db.Model(user).Set("is_enabled = ?", state).Where("id = ?", user.ID).Update(); err != nil {
+	user, err := GetUserByID(userID)
+	if err != nil {
 		return err
 	}
-	return nil
+
+	_, err = Db.Model(user).Set("is_enabled = ?", state).Where("id = ?", user.ID).Update()
+
+	return err
 }
