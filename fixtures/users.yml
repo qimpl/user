@@ -2,6 +2,7 @@
   first_name: Jean
   last_name: Dupond
   email: jean.dupond@qimpl.io
+  mobile_phone_number: "+33678906543"
   password: $2a$10$3aoVcnS7m8yYVDc/sDdCROhaQcU9yhr4LjVEGe8WyMOrCZaLP68sG
   birthdate: 1999-01-08
   country: FR
@@ -16,6 +17,7 @@
   first_name: Michel
   last_name: Martin
   email: michel.martind@qimpl.io
+  mobile_phone_number: "+33634985609"
   password: $2a$10$w9kHL7Su3of2udm2Hgqc4ue1vVaU9mdU44dGbmA3VCSpBxqVh1kVW
   birthdate: 1965-04-23
   country: FR
@@ -30,6 +32,7 @@
   first_name: Marie
   last_name: Masson
   email: marie.masson@qimpl.io
+  mobile_phone_number: "+33756894356"
   password: $2a$10$AXzl/KOCFAI8B/NhS/21OOrq64bjpHpPdh.//T1c4TCqT9wHySQZC
   birthdate: 1974-12-03
   country: FR
@@ -45,6 +48,7 @@
   first_name: Nicolas
   last_name: Henry
   email: nicolas.henry@qimpl.io
+  mobile_phone_number: "+33767876754"
   password: $2a$10$zIa/gP5gaWmJkhxK9f86FedPb8c9zcqst6y1JN9.GtNauffOtt94O
   birthdate: 2002-10-06
   country: FR

@@ -15,6 +15,7 @@ CREATE TABLE "users" (
     "first_name" varchar(64) NOT NULL,
     "last_name" varchar(64) NOT NULL,
     "email" varchar(100) NOT NULL UNIQUE,
+    "mobile_phone_number" varchar(20) NOT NULL UNIQUE,
     "password" varchar(100) NOT NULL,
     "birthdate" timestamp NOT NULL,
     "country" varchar(20) NOT NULL,
