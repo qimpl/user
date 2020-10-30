@@ -488,6 +488,10 @@ var doc = `{
                     "type": "boolean",
                     "example": true
                 },
+                "is_verified": {
+                    "type": "boolean",
+                    "example": true
+                },
                 "last_name": {
                     "type": "string",
                     "example": "Martin"

@@ -43,6 +43,9 @@ definitions:
       is_owner:
         example: true
         type: boolean
+      is_verified:
+        example: true
+        type: boolean
       last_name:
         example: Martin
         type: string

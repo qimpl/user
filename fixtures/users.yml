@@ -24,6 +24,7 @@
   city: Auby
   zip: 59950
   is_owner: true
+  is_verified: true
 
 - id: 7c1a2a5f-5deb-4cb1-a020-75357827606b
   first_name: Marie
