@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/qimpl/authentication/db"
 	"github.com/qimpl/authentication/models"
@@ -224,6 +225,7 @@ func AnonymizeUserByID(w http.ResponseWriter, r *http.Request) {
 
 	user = services.AnonymizeUser(user)
 	user.IsDeleted = true
+	user.DeletedAt = time.Now()
 	if err := db.UpdateUserByID(user); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest

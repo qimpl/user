@@ -28,7 +28,7 @@ func (badRequest *BadRequest) GetError(message string) *ErrorResponse {
 	}
 }
 
-// GetError return NotFound wrapped error
+// GetError return Unauthorized wrapped error
 func (unauthorized *Unauthorized) GetError(message string) *ErrorResponse {
 	return &ErrorResponse{
 		StatusCode: 401,

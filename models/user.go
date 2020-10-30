@@ -25,6 +25,7 @@ type User struct {
 	IsDeleted bool      `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	CreatedAt time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
+	DeletedAt time.Time `json:"deleted_at,omitempty" swaggerignore:"true"`
 }
 
 //UserLogin contain only user credentials used to authentication

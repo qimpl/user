@@ -27,7 +27,8 @@ CREATE TABLE "users" (
     "is_admin" bool DEFAULT FALSE NOT NULL,
     "is_deleted" bool DEFAULT FALSE NOT NULL,
     "created_at" timestamp DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP
+    "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP,
+    "deleted_at" timestamp
 );
 
 CREATE TRIGGER update_timestamp
