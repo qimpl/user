@@ -1,5 +1,19 @@
 basePath: /api/v1
 definitions:
+  models.TimeSlot:
+    properties:
+      end_time:
+        example: "18:00:00"
+        type: string
+      start_time:
+        example: "14:00:00"
+        type: string
+      user_id:
+        type: string
+      weekday:
+        example: mon
+        type: string
+    type: object
   models.User:
     properties:
       birthdate:
@@ -93,6 +107,63 @@ paths:
       summary: Can allow user to login and get an JWT.
       tags:
       - Authentication
+  /time-slots:
+    post:
+      consumes:
+      - application/json
+      description: Create a new time slot of a user
+      parameters:
+      - description: TimeSlot information
+        in: body
+        name: TimeSlot
+        required: true
+        schema:
+          $ref: '#/definitions/models.TimeSlot'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+      summary: Create a new time slot
+      tags:
+      - Time Slots
+  /time-slots/user/{user_id}:
+    get:
+      description: Get all time slots of a user using his ID
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Get all time slots of a user
+      tags:
+      - Time Slots
   /user:
     post:
       consumes:

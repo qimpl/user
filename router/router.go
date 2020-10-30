@@ -29,6 +29,7 @@ func CreateRouter() {
 
 	createAuthenticationRouter(APIRouter)
 	createUserRouter(APIRouter)
+	createTimeSlotsRouter(APIRouter)
 
 	port := os.Getenv("PORT")
 	if port == "" {
