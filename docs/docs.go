@@ -68,6 +68,93 @@ var doc = `{
                 }
             }
         },
+        "/time-slots": {
+            "post": {
+                "description": "Create a new time slot of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Time Slots"
+                ],
+                "summary": "Create a new time slot",
+                "parameters": [
+                    {
+                        "description": "TimeSlot information",
+                        "name": "TimeSlot",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TimeSlot"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/time-slots/user/{user_id}": {
+            "get": {
+                "description": "Get all time slots of a user using his ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Time Slots"
+                ],
+                "summary": "Get all time slots of a user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
             "post": {
                 "description": "Create a new user",
@@ -342,6 +429,26 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.TimeSlot": {
+            "type": "object",
+            "properties": {
+                "end_time": {
+                    "type": "string",
+                    "example": "18:00:00"
+                },
+                "start_time": {
+                    "type": "string",
+                    "example": "14:00:00"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "weekday": {
+                    "type": "string",
+                    "example": "mon"
+                }
+            }
+        },
         "models.User": {
             "type": "object",
             "properties": {
