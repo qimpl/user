@@ -23,6 +23,7 @@ import (
 // @Router /user/{user_id} [get]
 func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
 	user, err := db.GetUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

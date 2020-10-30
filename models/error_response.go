@@ -16,11 +16,23 @@ type NotFound int
 // UnprocessableEntity is the UnprocessableEntity (422) HTTP status code
 type UnprocessableEntity int
 
+// Unauthorized is the Unauthorized (401) HTTP status code
+type Unauthorized int
+
 // GetError return BadRequest wrapped error
-func (BadRequest *BadRequest) GetError(message string) *ErrorResponse {
+func (badRequest *BadRequest) GetError(message string) *ErrorResponse {
 	return &ErrorResponse{
 		StatusCode: 400,
 		ErrorCode:  "BadRequest",
+		Message:    message,
+	}
+}
+
+// GetError return NotFound wrapped error
+func (unauthorized *Unauthorized) GetError(message string) *ErrorResponse {
+	return &ErrorResponse{
+		StatusCode: 401,
+		ErrorCode:  "Unauthorized",
 		Message:    message,
 	}
 }
