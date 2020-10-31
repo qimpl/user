@@ -488,9 +488,17 @@ var doc = `{
                     "type": "boolean",
                     "example": true
                 },
+                "is_verified": {
+                    "type": "boolean",
+                    "example": true
+                },
                 "last_name": {
                     "type": "string",
                     "example": "Martin"
+                },
+                "mobile_phone_number": {
+                    "type": "string",
+                    "example": "0610890978"
                 },
                 "password": {
                     "type": "string",
