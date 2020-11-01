@@ -155,6 +155,65 @@ var doc = `{
                 }
             }
         },
+        "/time-slots/{time_slot_id}": {
+            "put": {
+                "description": "Update Time Slot by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Time Slots"
+                ],
+                "summary": "Update Time Slot",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Time Slot ID",
+                        "name": "time_slot_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Time Slot information",
+                        "name": "TimeSlot",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TimeSlot"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "body"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
             "post": {
                 "description": "Create a new user",

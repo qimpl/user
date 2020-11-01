@@ -46,6 +46,60 @@ func CreateTimeSlot(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(timeSlot)
 }
 
+// UpdateTimeSlotByID update a time slot from a given ID
+// @Summary Update Time Slot
+// @Description Update Time Slot by its ID
+// @Tags Time Slots
+// @Accept json
+// @Param time_slot_id query string true "Time Slot ID"
+// @Param TimeSlot body models.TimeSlot true "Time Slot information"
+// @Produce json
+// @Success 200 body models.TimeSlot TimeSlot
+// @Failure 400 {string} models.ErrorResponse
+// @Failure 404 {string} models.ErrorResponse
+// @Failure 422 {string} models.ErrorResponse
+// @Router /time-slots/{time_slot_id} [put]
+func UpdateTimeSlotByID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var body models.TimeSlotUpdate
+
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+		var unprocessableEntity *models.UnprocessableEntity
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
+
+		return
+	}
+
+	var timeSlot models.TimeSlot
+
+	timeSlotID := uuid.MustParse(mux.Vars(r)["time_slot_id"])
+	timeSlot, err := db.GetTimeSlotByID(timeSlotID)
+
+	if err != nil {
+		var notFound *models.NotFound
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(notFound.GetError("The given time slot ID doesn't exist"))
+
+		return
+	}
+
+	timeSlot.StartTime = body.StartTime
+	timeSlot.EndTime = body.EndTime
+
+	if _, err := db.UpdateTimeSlotByID(&timeSlot); err != nil {
+		var badRequest *models.BadRequest
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during time slot update"))
+
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(timeSlot)
+}
+
 // GetTimeSlotsByUserID return all time slots of a given user
 // @Summary Get all time slots of a user
 // @Description Get all time slots of a user using his ID

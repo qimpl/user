@@ -16,3 +16,9 @@ type TimeSlot struct {
 	CreatedAt time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }
+
+// TimeSlotUpdate is used in body update time slot method
+type TimeSlotUpdate struct {
+	StartTime string `json:"start_time" example:"14:00:00"`
+	EndTime   string `json:"end_time" example:"18:00:00"`
+}
