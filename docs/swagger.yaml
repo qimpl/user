@@ -143,6 +143,45 @@ paths:
       summary: Create a new time slot
       tags:
       - Time Slots
+  /time-slots/{time_slot_id}:
+    put:
+      consumes:
+      - application/json
+      description: Update Time Slot by its ID
+      parameters:
+      - description: Time Slot ID
+        in: query
+        name: time_slot_id
+        required: true
+        type: string
+      - description: Time Slot information
+        in: body
+        name: TimeSlot
+        required: true
+        schema:
+          $ref: '#/definitions/models.TimeSlot'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+      summary: Update Time Slot
+      tags:
+      - Time Slots
   /time-slots/user/{user_id}:
     get:
       description: Get all time slots of a user using his ID

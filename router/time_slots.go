@@ -14,6 +14,10 @@ func createTimeSlotsRouter(router *mux.Router) {
 		Methods("POST")
 
 	timeSlotsRouter.
+		HandleFunc("/{time_slot_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.UpdateTimeSlotByID).
+		Methods("PUT")
+
+	timeSlotsRouter.
 		HandleFunc("/user/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.GetTimeSlotsByUserID).
 		Methods("GET")
 }
