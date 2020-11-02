@@ -3,6 +3,7 @@ package db
 import (
 	"github.com/qimpl/authentication/models"
 
+	"github.com/go-pg/pg/v10"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -10,7 +11,7 @@ import (
 // GetUserByID search & return user from a given ID.
 func GetUserByID(userID uuid.UUID) (*models.User, error) {
 	user := new(models.User)
-	if err := Db.Model(user).Where("id = ?", userID).Select(); err != nil {
+	if err := Db.Model(user).Relation("NotificationPreferences").Where("? = ?", pg.Ident("user.id"), userID).First(); err != nil {
 		return nil, err
 	}
 
@@ -26,6 +27,14 @@ func CreateUser(user *models.User) (*models.User, error) {
 		return nil, err
 	}
 
+	notificationPreferences := new(models.NotificationPreferences)
+	notificationPreferences.UserID = user.ID
+	notificationPreferences.OnEmail = true
+	if _, err := Db.Model(notificationPreferences).Returning("*").Insert(); err != nil {
+		return nil, err
+	}
+
+	user.NotificationPreferences = notificationPreferences
 	user.Password = ""
 	return user, nil
 }
@@ -38,6 +47,14 @@ func UpdateUserByID(user *models.User) error {
 	}
 
 	_, err = Db.Model(user).Where("id = ?", user.ID).Update()
+
+	if err != nil {
+		return err
+	}
+
+	notificationPreferences := new(models.NotificationPreferences)
+	notificationPreferences = user.NotificationPreferences
+	_, err = Db.Model(notificationPreferences).Where("user_id = ?", user.ID).Update()
 
 	return err
 }

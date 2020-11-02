@@ -1,0 +1,17 @@
+- id: 751f5b3f-406c-42a1-8743-7beadca3808f
+  user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
+  on_email: false
+  on_sms: true
+
+- id: f6a09847-70eb-4ddb-8871-9d19c5cc542b
+  user_id: 2e202ea5-d635-4c2f-9bde-2f358ec98e94
+  on_email: false
+
+- id: 59fbe7f3-4501-48a3-9256-afd13349433b
+  user_id: 7c1a2a5f-5deb-4cb1-a020-75357827606b
+  on_sms: true
+
+- id: bda46383-324a-45b4-834b-2305def38aab
+  user_id: 27fd09df-794d-4f33-8a8e-358f42172a78
+  on_email: false
+  on_sms: true

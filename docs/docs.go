@@ -488,6 +488,23 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.NotificationPreferences": {
+            "type": "object",
+            "properties": {
+                "on_email": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "on_sms": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "user_id": {
+                    "type": "string",
+                    "example": "cb7bc97f-45b0-4972-8edf-dc7300cc059c"
+                }
+            }
+        },
         "models.TimeSlot": {
             "type": "object",
             "properties": {
@@ -558,6 +575,10 @@ var doc = `{
                 "mobile_phone_number": {
                     "type": "string",
                     "example": "0610890978"
+                },
+                "notification_preferences": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.NotificationPreferences"
                 },
                 "password": {
                     "type": "string",
