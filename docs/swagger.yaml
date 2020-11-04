@@ -225,6 +225,22 @@ paths:
       tags:
       - Time Slots
   /user:
+    get:
+      description: Get users array objects data from database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: body
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Get users from database
+      tags:
+      - Users
     post:
       consumes:
       - application/json
