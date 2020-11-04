@@ -8,6 +8,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// GetAllUsers get all users from the database
+func GetAllUsers() ([]models.User, error) {
+	var users []models.User
+	if err := Db.Model(&users).Order("created_at").Select(); err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 // GetUserByID search & return user from a given ID.
 func GetUserByID(userID uuid.UUID) (*models.User, error) {
 	user := new(models.User)

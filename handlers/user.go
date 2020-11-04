@@ -13,6 +13,28 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// GetAllUsers return all users
+// @Summary Get users from database
+// @Description Get users array objects data from database
+// @Tags Users
+// @Produce json
+// @Success 200 body []models.User Users
+// @Failure 400 {string} models.ErrorResponse
+// @Router /user [get]
+func GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	users, err := db.GetAllUsers()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during users retrieval"))
+
+		return
+	}
+
+	json.NewEncoder(w).Encode(users)
+}
+
 // GetUserByID return an user from a given ID
 // @Summary Get user by his id
 // @Description Get user object data from database
