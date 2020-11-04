@@ -16,7 +16,7 @@
 - id: 2e202ea5-d635-4c2f-9bde-2f358ec98e94
   first_name: Michel
   last_name: Martin
-  email: michel.martind@qimpl.io
+  email: michel.martin@qimpl.io
   mobile_phone_number: "+33634985609"
   password: $2a$10$w9kHL7Su3of2udm2Hgqc4ue1vVaU9mdU44dGbmA3VCSpBxqVh1kVW
   birthdate: 1965-04-23
