@@ -43,6 +43,9 @@ func CreateRouter() {
 			http.MethodPut,
 			http.MethodDelete,
 		},
+		AllowedHeaders: []string{
+			"Authorization",
+		},
 	})
 
 	handler := c.Handler(router)
