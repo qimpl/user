@@ -1,24 +1,24 @@
-- weekday: mon
+- weekday: 1
   start_time: 18:00:00
   end_time: 20:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
 
-- weekday: wed
+- weekday: 3
   start_time: 18:00:00
   end_time: 20:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
 
-- weekday: fri
+- weekday: 5
   start_time: 16:00:00
   end_time: 20:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
 
-- weekday: thu
+- weekday: 4
   start_time: 12:00:00
   end_time: 14:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
 
-- weekday: tue
+- weekday: 2
   start_time: 12:00:00
   end_time: 13:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f

@@ -23,8 +23,8 @@ definitions:
       user_id:
         type: string
       weekday:
-        example: mon
-        type: string
+        example: 0
+        type: integer
     type: object
   models.User:
     properties:

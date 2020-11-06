@@ -544,8 +544,8 @@ var doc = `{
                     "type": "string"
                 },
                 "weekday": {
-                    "type": "string",
-                    "example": "mon"
+                    "type": "integer",
+                    "example": 0
                 }
             }
         },

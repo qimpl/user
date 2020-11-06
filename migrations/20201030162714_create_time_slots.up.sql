@@ -1,11 +1,11 @@
 CREATE TYPE weekdays AS ENUM (
-  'mon',
-  'tue',
-  'wed',
-  'thu',
-  'fri',
-  'sat',
-  'sun'
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6'
 );
 
 CREATE TABLE "time_slots" (
@@ -23,4 +23,3 @@ CREATE TRIGGER update_timestamp
   BEFORE UPDATE ON "time_slots"
   FOR EACH ROW
   EXECUTE PROCEDURE trigger_update_timestamp ();
-

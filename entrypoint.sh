@@ -13,7 +13,7 @@ LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/r
 
 mkdir -p cmd && \
 cd cmd && \
-wget https://github.com/${ORG_NAME}/${REPO_NAME}/releases/download/v${LATEST_VERSION}//testfixtures_linux_amd64.tar.gz \
+wget https://github.com/${ORG_NAME}/${REPO_NAME}/releases/download/v${LATEST_VERSION}/testfixtures_linux_amd64.tar.gz \
 -O testfixtures.tar.gz && \
 tar -xvf testfixtures.tar.gz && \
 mv testfixtures /bin/testfixtures && \
