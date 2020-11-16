@@ -616,6 +616,14 @@ var doc = `{
                     "type": "string",
                     "example": "Rue des peupliers"
                 },
+                "stripe_customer_id": {
+                    "type": "string",
+                    "example": "cus_IOwdRp9gIlOjTD"
+                },
+                "stripe_payment_method_id": {
+                    "type": "string",
+                    "example": "pm_1Ho8k8CMhQMU3AqAKJwPYAXj"
+                },
                 "zip": {
                     "type": "string",
                     "example": "59000"
