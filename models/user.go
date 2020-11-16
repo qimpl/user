@@ -26,6 +26,8 @@ type User struct {
 	IsVerified              bool                     `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
 	IsDeleted               bool                     `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	NotificationPreferences *NotificationPreferences `json:"notification_preferences,omitempty" pg:"rel:belongs-to"`
+	StripeCustomerID        string                   `json:"stripe_customer_id,omitempty" pg:"stripe_customer_id" example:"cus_IOwdRp9gIlOjTD"`
+	StripePaymentMethodID   string                   `json:"stripe_payment_method_id,omitempty" pg:"stripe_payment_method_id" example:"pm_1Ho8k8CMhQMU3AqAKJwPYAXj"`
 	CreatedAt               time.Time                `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt               time.Time                `json:"updated_at,omitempty" swaggerignore:"true"`
 	DeletedAt               time.Time                `json:"deleted_at,omitempty" swaggerignore:"true"`

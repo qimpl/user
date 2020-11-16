@@ -76,6 +76,12 @@ definitions:
       street:
         example: Rue des peupliers
         type: string
+      stripe_customer_id:
+        example: cus_IOwdRp9gIlOjTD
+        type: string
+      stripe_payment_method_id:
+        example: pm_1Ho8k8CMhQMU3AqAKJwPYAXj
+        type: string
       zip:
         example: "59000"
         type: string
