@@ -28,11 +28,17 @@ definitions:
     type: object
   models.User:
     properties:
+      additional_street_information:
+        example: Residence des peupliers
+        type: string
       birthdate:
         example: "1999-10-05"
         type: string
       city:
         example: Lille
+        type: string
+      civility:
+        example: Mme
         type: string
       country:
         example: FR
