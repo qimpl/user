@@ -552,6 +552,10 @@ var doc = `{
         "models.User": {
             "type": "object",
             "properties": {
+                "additional_street_information": {
+                    "type": "string",
+                    "example": "Residence des peupliers"
+                },
                 "birthdate": {
                     "type": "string",
                     "example": "1999-10-05"
@@ -559,6 +563,10 @@ var doc = `{
                 "city": {
                     "type": "string",
                     "example": "Lille"
+                },
+                "civility": {
+                    "type": "string",
+                    "example": "Mme"
                 },
                 "country": {
                     "type": "string",

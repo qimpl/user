@@ -12,6 +12,7 @@ LANGUAGE plpgsql;
 
 CREATE TABLE "users" (
   "id" uuid PRIMARY KEY UNIQUE DEFAULT gen_random_uuid (),
+  "civility" varchar(4) DEFAULT 'Mr' NOT NULL,
   "first_name" varchar(64) NOT NULL,
   "last_name" varchar(64) NOT NULL,
   "email" varchar(100) NOT NULL UNIQUE,
@@ -21,6 +22,7 @@ CREATE TABLE "users" (
   "country" varchar(20) NOT NULL,
   "state" varchar(50),
   "street" varchar(100) NOT NULL,
+  "additional_street_information" varchar(100),
   "city" varchar(64) NOT NULL,
   "zip" varchar(20) NOT NULL,
   "is_owner" bool DEFAULT FALSE NOT NULL,
@@ -39,3 +41,4 @@ CREATE TRIGGER update_timestamp
   BEFORE UPDATE ON "users"
   FOR EACH ROW
   EXECUTE PROCEDURE trigger_update_timestamp ();
+

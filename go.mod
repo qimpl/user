@@ -16,9 +16,9 @@ require (
 	github.com/rs/cors v1.7.0
 	github.com/swaggo/http-swagger v0.0.0-20200308142732-58ac5e232fba
 	github.com/swaggo/swag v1.6.7
-	golang.org/x/crypto v0.0.0-20201116153603-4be66e5b6582
+	golang.org/x/crypto v0.0.0-20201117144127-c1f2f97bffc9
 	golang.org/x/net v0.0.0-20201110031124-69a78807bb2b // indirect
-	golang.org/x/sys v0.0.0-20201116161645-c061ba923fbb // indirect
+	golang.org/x/sys v0.0.0-20201119102817-f84b799fce68 // indirect
 	golang.org/x/text v0.3.4 // indirect
-	golang.org/x/tools v0.0.0-20201116172350-d68bbb546781 // indirect
+	golang.org/x/tools v0.0.0-20201120032337-6d151481565c // indirect
 )
