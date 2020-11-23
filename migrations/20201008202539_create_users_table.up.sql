@@ -31,6 +31,7 @@ CREATE TABLE "users" (
   "is_verified" bool DEFAULT FALSE NOT NULL,
   "is_deleted" bool DEFAULT FALSE NOT NULL,
   "stripe_customer_id" varchar(20),
+  "stripe_account_id" varchar(25),
   "stripe_payment_method_id" varchar(30),
   "created_at" timestamp DEFAULT CURRENT_TIMESTAMP,
   "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -41,4 +42,3 @@ CREATE TRIGGER update_timestamp
   BEFORE UPDATE ON "users"
   FOR EACH ROW
   EXECUTE PROCEDURE trigger_update_timestamp ();
-
