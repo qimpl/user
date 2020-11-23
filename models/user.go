@@ -25,7 +25,6 @@ type User struct {
 	Password                    string                   `json:"password,omitempty" example:"MyPassword"`
 	IsEnabled                   bool                     `json:"is_enabled,omitempty" pg:",use_zero" example:"true"`
 	IsAdmin                     bool                     `json:"is_admin,omitempty" pg:",use_zero" example:"true"`
-	IsVerified                  bool                     `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
 	IsDeleted                   bool                     `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	NotificationPreferences     *NotificationPreferences `json:"notification_preferences,omitempty" pg:"rel:belongs-to"`
 	StripeCustomerID            string                   `json:"stripe_customer_id,omitempty" pg:"stripe_customer_id" example:"cus_IOwdRp9gIlOjTD"`
@@ -55,4 +54,29 @@ type NotificationPreferences struct {
 	OnSms     bool      `json:"on_sms,omitempty" pg:",use_zero" example:"false"`
 	CreatedAt time.Time `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
+}
+
+// StripeIdentityVerificationResponse contain all data from Stripe identity API response
+type StripeIdentityVerificationResponse struct {
+	ID         string `json:"id"`
+	NextAction struct {
+		RedirectToURL string `json:"redirect_to_url"`
+		Type          string `json:"type"`
+	} `json:"next_action"`
+	PersonID   string `json:"person"`
+	ReturnURL  string `json:"return_url"`
+	RefreshURL string `json:"refresh_url"`
+	Status     string `json:"status"`
+}
+
+// UserVerification contain all user verification data
+type UserVerification struct {
+	ID               uuid.UUID `json:"id" swaggerignore:"true"`
+	UserID           uuid.UUID `json:"user_id" example:"cb7bc97f-45b0-4972-8edf-dc7300cc059c"`
+	IsVerified       bool      `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
+	StripePersonID   string    `json:"stripe_person_id,omitempty" example:"vip_IRVyOgajqmYpMq"`
+	VerificationType string    `json:"verification_type" example:"identity_document"`
+	VerifiedAt       time.Time `json:"verified_at,omitempty" example:""`
+	CreatedAt        time.Time `json:"created_at,omitempty" swaggerignore:"true"`
+	UpdatedAt        time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }

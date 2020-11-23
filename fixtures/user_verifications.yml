@@ -1,0 +1,10 @@
+- id: eaa97094-69ca-4173-9e19-0c8923bf2c5a
+  user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
+  is_verified: true
+  stripe_person_id: vip_IRVyOgajqmYpMq
+  verification_type: identity_document
+  verified_at: 2020-11-23
+
+- id: d71edecc-497c-468c-b4c5-846e739a850c
+  user_id: 27fd09df-794d-4f33-8a8e-358f42172a78
+  stripe_person_id: vip_IRVyOmpoihYpMq
