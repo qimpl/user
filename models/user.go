@@ -29,6 +29,7 @@ type User struct {
 	IsDeleted                   bool                     `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	NotificationPreferences     *NotificationPreferences `json:"notification_preferences,omitempty" pg:"rel:belongs-to"`
 	StripeCustomerID            string                   `json:"stripe_customer_id,omitempty" pg:"stripe_customer_id" example:"cus_IOwdRp9gIlOjTD"`
+	StripeAccountID             string                   `json:"stripe_account_id,omitempty" pg:"stripe_account_id" example:"acct_1HqMQH2Hlu9RYi7N"`
 	StripePaymentMethodID       string                   `json:"stripe_payment_method_id,omitempty" pg:"stripe_payment_method_id" example:"pm_1Ho8k8CMhQMU3AqAKJwPYAXj"`
 	CreatedAt                   time.Time                `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt                   time.Time                `json:"updated_at,omitempty" swaggerignore:"true"`
