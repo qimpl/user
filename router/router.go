@@ -23,9 +23,11 @@ func CreateRouter() {
 	router := mux.NewRouter()
 	APIRouter := router.PathPrefix("/api/v1").Subrouter()
 
-	router.Use(jwtVerifyTokenMiddleware)
-
 	APIRouter.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
+
+	if os.Getenv("ENV") != "dev" {
+		router.Use(jwtVerifyTokenMiddleware)
+	}
 
 	createAuthenticationRouter(APIRouter)
 	createUserRouter(APIRouter)

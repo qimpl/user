@@ -44,4 +44,8 @@ func createUserRouter(router *mux.Router) {
 	userRouter.
 		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/desactivate", handlers.DesactivateUserAccount).
 		Methods("PUT")
+
+	userRouter.
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/identity/verification_intent", handlers.StripeVerificationIntent).
+		Methods("POST")
 }

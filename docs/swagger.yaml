@@ -1,5 +1,14 @@
 basePath: /api/v1
 definitions:
+  models.ErrorResponse:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
   models.NotificationPreferences:
     properties:
       on_email:
@@ -10,6 +19,26 @@ definitions:
         type: boolean
       user_id:
         example: cb7bc97f-45b0-4972-8edf-dc7300cc059c
+        type: string
+    type: object
+  models.StripeIdentityVerificationResponse:
+    properties:
+      id:
+        type: string
+      next_action:
+        properties:
+          redirect_to_url:
+            type: string
+          type:
+            type: string
+        type: object
+      person:
+        type: string
+      refresh_url:
+        type: string
+      return_url:
+        type: string
+      status:
         type: string
     type: object
   models.TimeSlot:
@@ -59,9 +88,6 @@ definitions:
         example: true
         type: boolean
       is_owner:
-        example: true
-        type: boolean
-      is_verified:
         example: true
         type: boolean
       last_name:
@@ -248,11 +274,13 @@ paths:
         "200":
           description: OK
           schema:
-            type: body
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Get users from database
       tags:
       - Users
@@ -273,15 +301,15 @@ paths:
         "201":
           description: Created
           schema:
-            type: body
+            $ref: '#/definitions/models.User'
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
         "422":
           description: Unprocessable Entity
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Create user
       tags:
       - Users
@@ -299,7 +327,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Delete user by his id
       tags:
       - Users
@@ -317,11 +345,11 @@ paths:
         "200":
           description: OK
           schema:
-            type: body
+            $ref: '#/definitions/models.User'
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Get user by his id
       tags:
       - Users
@@ -342,15 +370,15 @@ paths:
         "200":
           description: OK
           schema:
-            type: body
+            $ref: '#/definitions/models.User'
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
         "422":
           description: Unprocessable Entity
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Update User by his ID
       tags:
       - Users
@@ -368,11 +396,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: anonymize user account by his id.
       tags:
       - Users
@@ -390,8 +418,33 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Desactivate user account by his id.
+      tags:
+      - Users
+  /user/{user_id}/identity/verification_intent:
+    post:
+      description: Create Stripe Link et insert into database a new identity verification process
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.StripeIdentityVerificationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Create Stripe link intent to validate identity for a given user
       tags:
       - Users
   /user/{user_id}/reset/password:
@@ -409,11 +462,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
         "422":
           description: Unprocessable Entity
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Reset user password by his id
       tags:
       - Users
@@ -431,7 +484,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            type: string
+            $ref: '#/definitions/models.ErrorResponse'
       summary: Validate user account by his id.
       tags:
       - Users

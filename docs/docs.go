@@ -228,13 +228,16 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "body"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -266,19 +269,19 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "type": "body"
+                            "$ref": "#/definitions/models.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -307,13 +310,13 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "body"
+                            "$ref": "#/definitions/models.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -345,19 +348,19 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "body"
+                            "$ref": "#/definitions/models.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -382,7 +385,7 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -409,13 +412,13 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -442,7 +445,45 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}/identity/verification_intent": {
+            "post": {
+                "description": "Create Stripe Link et insert into database a new identity verification process",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create Stripe link intent to validate identity for a given user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.StripeIdentityVerificationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -471,13 +512,13 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -504,7 +545,7 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -512,6 +553,20 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
+                }
+            }
+        },
         "models.NotificationPreferences": {
             "type": "object",
             "properties": {
@@ -526,6 +581,37 @@ var doc = `{
                 "user_id": {
                     "type": "string",
                     "example": "cb7bc97f-45b0-4972-8edf-dc7300cc059c"
+                }
+            }
+        },
+        "models.StripeIdentityVerificationResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "next_action": {
+                    "type": "object",
+                    "properties": {
+                        "redirect_to_url": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "person": {
+                    "type": "string"
+                },
+                "refresh_url": {
+                    "type": "string"
+                },
+                "return_url": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -593,10 +679,6 @@ var doc = `{
                     "example": true
                 },
                 "is_owner": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "is_verified": {
                     "type": "boolean",
                     "example": true
                 },

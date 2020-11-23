@@ -106,3 +106,11 @@ func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
 
 	return err
 }
+
+// CreateUserVerification create a new entry into user_verification table for a given user.
+func CreateUserVerification(userVerification *models.UserVerification) error {
+	if _, err := Db.Model(userVerification).Insert(); err != nil {
+		return err
+	}
+	return nil
+}

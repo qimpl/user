@@ -28,7 +28,6 @@ CREATE TABLE "users" (
   "is_owner" bool DEFAULT FALSE NOT NULL,
   "is_enabled" bool DEFAULT FALSE NOT NULL,
   "is_admin" bool DEFAULT FALSE NOT NULL,
-  "is_verified" bool DEFAULT FALSE NOT NULL,
   "is_deleted" bool DEFAULT FALSE NOT NULL,
   "stripe_customer_id" varchar(20),
   "stripe_account_id" varchar(25),
