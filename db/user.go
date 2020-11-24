@@ -21,11 +21,35 @@ func GetAllUsers() ([]models.User, error) {
 // GetUserByID search & return user from a given ID.
 func GetUserByID(userID uuid.UUID) (*models.User, error) {
 	user := new(models.User)
-	if err := Db.Model(user).Relation("NotificationPreferences").Where("? = ?", pg.Ident("user.id"), userID).First(); err != nil {
+
+	if err := Db.Model(user).
+		Relation("NotificationPreferences").
+		Relation("UserVerifications").
+		Where("? = ?", pg.Ident("user.id"), userID).
+		First(); err != nil {
 		return nil, err
 	}
 
 	return user, nil
+}
+
+// GetPartialUserByID search and return only few data of a given user.
+// Useful when needs to return non sensible data on unprotected API route
+func GetPartialUserByID(userID uuid.UUID) (*models.PartialUser, error) {
+	user, err := GetUserByID(userID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	partialUser := models.PartialUser{
+		FirstName:  user.FirstName,
+		LastName:   user.LastName,
+		IsVerified: user.UserVerifications.IsVerified,
+		CreatedAt:  user.CreatedAt,
+	}
+
+	return &partialUser, nil
 }
 
 // CreateUser hash the password & add an user in database.
@@ -108,7 +132,7 @@ func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
 }
 
 // CreateUserVerification create a new entry into user_verification table for a given user.
-func CreateUserVerification(userVerification *models.UserVerification) error {
+func CreateUserVerification(userVerification *models.UserVerifications) error {
 	if _, err := Db.Model(userVerification).Insert(); err != nil {
 		return err
 	}
