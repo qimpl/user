@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/qimpl/authentication/models"
@@ -16,7 +17,7 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
-var unProtectedRoutes = []string{"/user/register", "/authenticate", "/swagger/"}
+var unProtectedRoutes = []string{"/user/register", "/user/{user_id}/partial", "/authenticate", "/swagger/"}
 
 // CreateRouter create authentication API routes
 func CreateRouter() {
@@ -61,7 +62,15 @@ func jwtVerifyTokenMiddleware(next http.Handler) http.Handler {
 
 		requestURI := strings.TrimPrefix(r.RequestURI, "/api/v1")
 		for _, route := range unProtectedRoutes {
-			if requestURI == route {
+			uriParams := regexp.MustCompile("\\{(.*?)\\}").FindAllStringSubmatch(route, -1)
+
+			if len(uriParams) != 0 {
+				for _, uriParam := range uriParams {
+					route = strings.Replace(route, uriParam[0], mux.Vars(r)[uriParam[1]], 1)
+				}
+			}
+
+			if strings.Contains(requestURI, route) {
 				next.ServeHTTP(w, r)
 				return
 			}

@@ -489,6 +489,41 @@ var doc = `{
                 }
             }
         },
+        "/user/{user_id}/partial": {
+            "get": {
+                "description": "Get partial user object data from database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get partial user by its id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.PartialUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user/{user_id}/reset/password": {
             "put": {
                 "description": "Update user password field into database",
@@ -581,6 +616,27 @@ var doc = `{
                 "user_id": {
                     "type": "string",
                     "example": "cb7bc97f-45b0-4972-8edf-dc7300cc059c"
+                }
+            }
+        },
+        "models.PartialUser": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "1977-04-22T06:00:00Z"
+                },
+                "first_name": {
+                    "type": "string",
+                    "example": "Henri"
+                },
+                "is_verified": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Martin"
                 }
             }
         },
@@ -718,6 +774,10 @@ var doc = `{
                     "type": "string",
                     "example": "pm_1Ho8k8CMhQMU3AqAKJwPYAXj"
                 },
+                "user_verifications": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.UserVerifications"
+                },
                 "zip": {
                     "type": "string",
                     "example": "59000"
@@ -741,6 +801,30 @@ var doc = `{
             "type": "object",
             "properties": {
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UserVerifications": {
+            "type": "object",
+            "properties": {
+                "is_verified": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "stripe_person_id": {
+                    "type": "string",
+                    "example": "vip_IRVyOgajqmYpMq"
+                },
+                "user_id": {
+                    "type": "string",
+                    "example": "cb7bc97f-45b0-4972-8edf-dc7300cc059c"
+                },
+                "verification_type": {
+                    "type": "string",
+                    "example": "identity_document"
+                },
+                "verified_at": {
                     "type": "string"
                 }
             }

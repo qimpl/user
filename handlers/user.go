@@ -63,6 +63,30 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
+// GetPartialUserByID return a partial user with a given ID
+// @Summary Get partial user by its id
+// @Description Get partial user object data from database
+// @Tags Users
+// @Param user_id query string true "User ID"
+// @Produce json
+// @Success 200 {object} models.PartialUser PartialUser
+// @Failure 400 {object} models.ErrorResponse
+// @Router /user/{user_id}/partial [get]
+func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	partialUser, err := db.GetPartialUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		var badRequest *models.BadRequest
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
+
+		return
+	}
+
+	json.NewEncoder(w).Encode(partialUser)
+}
+
 // CreateUser create an user into database
 // @Summary Create user
 // @Description Create a new user
@@ -310,7 +334,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 
 	json.NewDecoder(resp.Body).Decode(&stripeIdentityVerificationResponse)
 
-	userVerification := &models.UserVerification{
+	userVerification := &models.UserVerifications{
 		UserID:           user.ID,
 		StripePersonID:   stripeIdentityVerificationResponse.PersonID,
 		VerificationType: stripeVerification,

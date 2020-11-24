@@ -18,6 +18,10 @@ func createUserRouter(router *mux.Router) {
 		Methods("GET")
 
 	userRouter.
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/partial", handlers.GetPartialUserByID).
+		Methods("GET")
+
+	userRouter.
 		HandleFunc("/register", handlers.CreateUser).
 		Methods("POST")
 

@@ -27,12 +27,21 @@ type User struct {
 	IsAdmin                     bool                     `json:"is_admin,omitempty" pg:",use_zero" example:"true"`
 	IsDeleted                   bool                     `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
 	NotificationPreferences     *NotificationPreferences `json:"notification_preferences,omitempty" pg:"rel:belongs-to"`
+	UserVerifications           *UserVerifications       `json:"user_verifications,omitempty" pg:"rel:belongs-to"`
 	StripeCustomerID            string                   `json:"stripe_customer_id,omitempty" pg:"stripe_customer_id" example:"cus_IOwdRp9gIlOjTD"`
 	StripeAccountID             string                   `json:"stripe_account_id,omitempty" pg:"stripe_account_id" example:"acct_1HqMQH2Hlu9RYi7N"`
 	StripePaymentMethodID       string                   `json:"stripe_payment_method_id,omitempty" pg:"stripe_payment_method_id" example:"pm_1Ho8k8CMhQMU3AqAKJwPYAXj"`
 	CreatedAt                   time.Time                `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt                   time.Time                `json:"updated_at,omitempty" swaggerignore:"true"`
 	DeletedAt                   time.Time                `json:"deleted_at,omitempty" swaggerignore:"true"`
+}
+
+// PartialUser contains only non sensible user data return inside a non protected get user API route
+type PartialUser struct {
+	FirstName  string    `json:"first_name" example:"Henri"`
+	LastName   string    `json:"last_name" example:"Martin"`
+	IsVerified bool      `json:"is_verified" pg:",use_zero" example:"true"`
+	CreatedAt  time.Time `json:"created_at" example:"1977-04-22T06:00:00Z"`
 }
 
 //UserLogin contain only user credentials used to authentication
@@ -69,8 +78,8 @@ type StripeIdentityVerificationResponse struct {
 	Status     string `json:"status"`
 }
 
-// UserVerification contain all user verification data
-type UserVerification struct {
+// UserVerifications contain all user verification data
+type UserVerifications struct {
 	ID               uuid.UUID `json:"id" swaggerignore:"true"`
 	UserID           uuid.UUID `json:"user_id" example:"cb7bc97f-45b0-4972-8edf-dc7300cc059c"`
 	IsVerified       bool      `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
