@@ -55,9 +55,14 @@ func ValidateJwtToken(tokenString string) (bool, error) {
 		}
 		return []byte(os.Getenv("JWT_TOKEN_SECRET")), nil
 	})
+
+	if err != nil {
+		return false, err
+	}
+
 	if _, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		return true, nil
 	}
 
-	return false, err
+	return false, nil
 }
