@@ -9,7 +9,7 @@ import (
 // TimeSlot represent a single Time Slot inside the database
 type TimeSlot struct {
 	ID        uuid.UUID `json:"id,omitempty" pg:"id" swaggerignore:"true"`
-	Weekday   int       `json:"weekday" example:"0"`
+	Weekday   string    `json:"weekday" example:"0"`
 	StartTime string    `json:"start_time" example:"14:00:00"`
 	EndTime   string    `json:"end_time" example:"18:00:00"`
 	UserID    uuid.UUID `json:"user_id"`

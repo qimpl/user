@@ -13,3 +13,17 @@ $ ./config.sh my-super-api
 ```
 
 After that, you can run `make init` to copy all configuration files, then you can run `docker-compose up`.
+
+## Tests
+
+Run tests using the Make recipe `test`
+
+```sh
+$ make test
+```
+
+To add verbosity to `go test` command
+
+```sh
+$ make test VERBOSE=-v
+```
