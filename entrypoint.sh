@@ -1,10 +1,12 @@
 #!/bin/sh
 
 postgres=postgres://${DB_USER}:${DB_PASSWORD}@db/${DB_NAME}?sslmode=disable
+postgres_test=postgres://${DB_USER}:${DB_PASSWORD}@db/${DB_TEST_NAME}?sslmode=disable
 
 go get -tags 'postgres' -u github.com/golang-migrate/migrate/v4/cmd/migrate/
 
 migrate -source file://migrations -database $postgres up
+migrate -source file://migrations -database $postgres_test up
 
 ORG_NAME=go-testfixtures
 REPO_NAME=testfixtures

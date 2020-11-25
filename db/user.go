@@ -43,10 +43,13 @@ func GetPartialUserByID(userID uuid.UUID) (*models.PartialUser, error) {
 	}
 
 	partialUser := models.PartialUser{
-		FirstName:  user.FirstName,
-		LastName:   user.LastName,
-		IsVerified: user.UserVerifications.IsVerified,
-		CreatedAt:  user.CreatedAt,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		CreatedAt: user.CreatedAt,
+	}
+
+	if user.UserVerifications != nil {
+		partialUser.IsVerified = user.UserVerifications.IsVerified
 	}
 
 	return &partialUser, nil

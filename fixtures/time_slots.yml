@@ -1,4 +1,5 @@
-- weekday: 1
+- id: 08760256-f183-4b07-9f28-27b954d6cbcb
+  weekday: 1
   start_time: 18:00:00
   end_time: 20:00:00
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f

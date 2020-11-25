@@ -19,8 +19,10 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+      DB_TEST_NAME: ${DB_TEST_NAME}
     volumes:
       - "postgres:/var/lib/postgresql/data"
+      - ./scripts/postgres_init.sh:/docker-entrypoint-initdb.d/postgres_init.sh
 
   adminer:
     container_name: "adminer-user"
