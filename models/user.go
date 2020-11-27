@@ -14,7 +14,7 @@ type User struct {
 	LastName                    string                   `json:"last_name" example:"Martin"`
 	Email                       string                   `json:"email" example:"henri.martin@qimpl.fr"`
 	MobilePhoneNumber           string                   `json:"mobile_phone_number" example:"0610890978"`
-	Birthdate                   time.Time                `json:"birthdate" example:"1999-10-05"`
+	Birthdate                   time.Time                `json:"birthdate" example:"1999-10-05T00:00:00Z"`
 	Country                     string                   `json:"country" example:"FR"`
 	State                       string                   `json:"state" example:"Haut-De-France"`
 	Street                      string                   `json:"street" example:"Rue des peupliers"`

@@ -241,7 +241,9 @@ var doc = `{
                         }
                     }
                 }
-            },
+            }
+        },
+        "/user/register": {
             "post": {
                 "description": "Create a new user",
                 "consumes": [
@@ -424,13 +426,13 @@ var doc = `{
                 }
             }
         },
-        "/user/{user_id}/desactivate": {
+        "/user/{user_id}/deactivate": {
             "put": {
                 "description": "Update user is_enabled field into database",
                 "tags": [
                     "Users"
                 ],
-                "summary": "Desactivate user account by his id.",
+                "summary": "Deactivate user account by his id.",
                 "parameters": [
                     {
                         "type": "string",
@@ -700,7 +702,7 @@ var doc = `{
                 },
                 "birthdate": {
                     "type": "string",
-                    "example": "1999-10-05"
+                    "example": "1999-10-05T00:00:00Z"
                 },
                 "city": {
                     "type": "string",
