@@ -122,7 +122,7 @@ func ResetUserPassword(userID uuid.UUID, userResetPassword *models.UserResetPass
 	return err
 }
 
-// UpdateUserAccountStatus activate or desactivate & update is_enabled field into database
+// UpdateUserAccountStatus activate or deactivate & update is_enabled field into database
 func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
 	user, err := GetUserByID(userID)
 	if err != nil {

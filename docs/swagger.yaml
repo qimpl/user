@@ -76,7 +76,7 @@ definitions:
         example: Residence des peupliers
         type: string
       birthdate:
-        example: "1999-10-05"
+        example: "1999-10-05T00:00:00Z"
         type: string
       city:
         example: Lille
@@ -319,35 +319,6 @@ paths:
       summary: Get users from database
       tags:
       - Users
-    post:
-      consumes:
-      - application/json
-      description: Create a new user
-      parameters:
-      - description: User object
-        in: body
-        name: User
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/models.User'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ErrorResponse'
-        "422":
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/models.ErrorResponse'
-      summary: Create user
-      tags:
-      - Users
   /user/{user_id}:
     delete:
       description: Delete user data from database
@@ -439,7 +410,7 @@ paths:
       summary: anonymize user account by his id.
       tags:
       - Users
-  /user/{user_id}/desactivate:
+  /user/{user_id}/deactivate:
     put:
       description: Update user is_enabled field into database
       parameters:
@@ -454,7 +425,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.ErrorResponse'
-      summary: Desactivate user account by his id.
+      summary: Deactivate user account by his id.
       tags:
       - Users
   /user/{user_id}/identity/verification_intent:
@@ -544,6 +515,36 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       summary: Validate user account by his id.
+      tags:
+      - Users
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: User object
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Create user
       tags:
       - Users
 swagger: "2.0"

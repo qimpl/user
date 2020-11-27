@@ -46,7 +46,7 @@ func createUserRouter(router *mux.Router) {
 		Methods("PUT")
 
 	userRouter.
-		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/desactivate", handlers.DesactivateUserAccount).
+		HandleFunc("/{user_id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}/deactivate", handlers.DeactivateUserAccount).
 		Methods("PUT")
 
 	userRouter.

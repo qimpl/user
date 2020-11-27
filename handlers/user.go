@@ -97,7 +97,7 @@ func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
 // @Success 201 {object} models.User User
 // @Failure 400 {object} models.ErrorResponse
 // @Failure 422 {object} models.ErrorResponse
-// @Router /user [post]
+// @Router /user/register [post]
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var bodyUser models.User
@@ -234,20 +234,20 @@ func ValidateUserAccount(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-// DesactivateUserAccount allow user to desactivate his account.
-// @Summary Desactivate user account by his id.
+// DeactivateUserAccount allow user to deactivate his account.
+// @Summary Deactivate user account by his id.
 // @Description Update user is_enabled field into database
 // @Tags Users
 // @Param user_id query string true "User ID"
 // @Success 204 ""
 // @Failure 400 {object} models.ErrorResponse
-// @Router /user/{user_id}/desactivate [put]
-func DesactivateUserAccount(w http.ResponseWriter, r *http.Request) {
+// @Router /user/{user_id}/deactivate [put]
+func DeactivateUserAccount(w http.ResponseWriter, r *http.Request) {
 	if err := db.UpdateUserAccountStatus(uuid.MustParse(mux.Vars(r)["user_id"]), false); err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
-		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user account desactivation"))
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user account deactivation"))
 
 		return
 	}
