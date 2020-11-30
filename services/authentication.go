@@ -17,12 +17,13 @@ import (
 func CreateJwtToken(user *models.User) *models.TokenHash {
 	expirationDate, _ := strconv.Atoi(time.Now().Add(time.Hour * 2).Format("20060102150405"))
 	claims := &models.Token{
-		ID:        user.ID,
-		FirstName: user.FirstName,
-		LastName:  user.LastName,
-		Email:     user.Email,
-		IsOwner:   user.IsOwner,
-		IsAdmin:   user.IsAdmin,
+		ID:         user.ID,
+		FirstName:  user.FirstName,
+		LastName:   user.LastName,
+		Email:      user.Email,
+		IsOwner:    user.IsOwner,
+		IsAdmin:    user.IsAdmin,
+		IsVerified: user.UserVerifications.IsVerified,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: int64(expirationDate),
 			Issuer:    "Qimpl",

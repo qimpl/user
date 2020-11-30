@@ -9,7 +9,9 @@ import (
 // Login select user from the database and verify if input password is equal to the database password hash.
 func Login(email string, password string) (*models.User, error) {
 	var user models.User
-	if err := Db.Model(&user).Where("email = ?", email).Select(); err != nil {
+	if err := Db.Model(&user).
+		Relation("UserVerifications").
+		Where("email = ?", email).Select(); err != nil {
 		return nil, err
 	}
 
