@@ -17,11 +17,14 @@ func TestCreateJwtToken(t *testing.T) {
 		Email:     "john@test.com",
 		IsOwner:   true,
 		IsAdmin:   false,
+		UserVerifications: &models.UserVerifications{
+			IsVerified: true,
+		},
 	})
 
 	assert.IsType(t, &models.TokenHash{}, token)
 	assert.IsType(t, new(string), &token.Token)
-	assert.Regexp(t, "^[\\w-_]{36}.[\\w-_]{234}.[\\w-_]{43}$", token.Token)
+	assert.Regexp(t, "^[\\w-_]{36}.[\\w-_]+.[\\w-_]{43}$", token.Token)
 }
 
 func TestLogin(t *testing.T) {

@@ -7,12 +7,13 @@ import (
 
 // Token is the Json Web Token struct  used after user login.
 type Token struct {
-	ID        uuid.UUID `json:"id"`
-	FirstName string    `json:"first_name"`
-	LastName  string    `json:"last_name"`
-	Email     string    `json:"email"`
-	IsOwner   bool      `json:"is_owner"`
-	IsAdmin   bool      `json:"is_admin"`
+	ID         uuid.UUID `json:"id"`
+	FirstName  string    `json:"first_name"`
+	LastName   string    `json:"last_name"`
+	Email      string    `json:"email"`
+	IsOwner    bool      `json:"is_owner"`
+	IsAdmin    bool      `json:"is_admin"`
+	IsVerified bool      `json:"is_verified"`
 	jwt.StandardClaims
 }
 
