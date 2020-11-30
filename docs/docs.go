@@ -814,9 +814,17 @@ var doc = `{
                     "type": "boolean",
                     "example": true
                 },
+                "status": {
+                    "type": "string",
+                    "example": "succeeded"
+                },
                 "stripe_person_id": {
                     "type": "string",
                     "example": "vip_IRVyOgajqmYpMq"
+                },
+                "stripe_verification_intent_id": {
+                    "type": "string",
+                    "example": "vi_1HtJVfCMhQMU3AqAQX1exAUB"
                 },
                 "user_id": {
                     "type": "string",

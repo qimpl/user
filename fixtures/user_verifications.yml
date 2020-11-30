@@ -1,5 +1,6 @@
 - id: eaa97094-69ca-4173-9e19-0c8923bf2c5a
   user_id: 8a76b8db-0490-4ff4-8bdb-dcd18b582c2f
+  stripe_verification_intent_id: vi_1HtJVfCMhQMU3AqAQX1exAUB
   is_verified: true
   stripe_person_id: vip_IRVyOgajqmYpMq
   verification_type: identity_document
