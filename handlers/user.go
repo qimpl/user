@@ -310,11 +310,11 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var stripeVerification = "identity_document"
+	var stripeVerificationType = "identity_document"
 
 	data := url.Values{}
-	data.Set("return_url", fmt.Sprintf("/%s/%s", os.Getenv("STRIPE_IDENTITY_RETURN_URL"), userID.String()))
-	data.Set("requested_verifications[0]", stripeVerification)
+	data.Set("return_url", fmt.Sprintf("%s/%s", os.Getenv("STRIPE_IDENTITY_RETURN_URL"), userID.String()))
+	data.Set("requested_verifications[0]", stripeVerificationType)
 
 	client := &http.Client{}
 	request, _ := http.NewRequest("POST", "https://api.stripe.com/v1/identity/verification_intents", strings.NewReader(data.Encode()))
@@ -341,7 +341,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 		StripeVerificationIntentID: stripeIdentityVerificationResponse.ID,
 		Status:                     stripeIdentityVerificationResponse.Status,
 		StripePersonID:             stripeIdentityVerificationResponse.PersonID,
-		VerificationType:           stripeVerification,
+		VerificationType:           stripeVerificationType,
 	}
 
 	if err := db.CreateOrUpdateUserVerification(userVerification); err != nil {
