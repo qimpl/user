@@ -158,8 +158,14 @@ definitions:
       is_verified:
         example: true
         type: boolean
+      status:
+        example: succeeded
+        type: string
       stripe_person_id:
         example: vip_IRVyOgajqmYpMq
+        type: string
+      stripe_verification_intent_id:
+        example: vi_1HtJVfCMhQMU3AqAQX1exAUB
         type: string
       user_id:
         example: cb7bc97f-45b0-4972-8edf-dc7300cc059c

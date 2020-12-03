@@ -80,12 +80,14 @@ type StripeIdentityVerificationResponse struct {
 
 // UserVerifications contain all user verification data
 type UserVerifications struct {
-	ID               uuid.UUID `json:"id" swaggerignore:"true"`
-	UserID           uuid.UUID `json:"user_id" example:"cb7bc97f-45b0-4972-8edf-dc7300cc059c"`
-	IsVerified       bool      `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
-	StripePersonID   string    `json:"stripe_person_id,omitempty" example:"vip_IRVyOgajqmYpMq"`
-	VerificationType string    `json:"verification_type" example:"identity_document"`
-	VerifiedAt       time.Time `json:"verified_at,omitempty" example:""`
-	CreatedAt        time.Time `json:"created_at,omitempty" swaggerignore:"true"`
-	UpdatedAt        time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
+	ID                         uuid.UUID `json:"id" swaggerignore:"true"`
+	UserID                     uuid.UUID `json:"user_id" example:"cb7bc97f-45b0-4972-8edf-dc7300cc059c"`
+	StripeVerificationIntentID string    `json:"stripe_verification_intent_id" example:"vi_1HtJVfCMhQMU3AqAQX1exAUB"`
+	IsVerified                 bool      `json:"is_verified,omitempty" pg:",use_zero" example:"true"`
+	Status                     string    `json:"status" example:"succeeded"`
+	StripePersonID             string    `json:"stripe_person_id,omitempty" example:"vip_IRVyOgajqmYpMq"`
+	VerificationType           string    `json:"verification_type" example:"identity_document"`
+	VerifiedAt                 time.Time `json:"verified_at,omitempty" example:""`
+	CreatedAt                  time.Time `json:"created_at,omitempty" swaggerignore:"true"`
+	UpdatedAt                  time.Time `json:"updated_at,omitempty" swaggerignore:"true"`
 }

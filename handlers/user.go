@@ -136,7 +136,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 // @Router /user/{user_id} [put]
 func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var user *models.User
+	var user models.User
 
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		w.WriteHeader(http.StatusUnprocessableEntity)
@@ -147,7 +147,7 @@ func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.ID = uuid.MustParse(mux.Vars(r)["user_id"])
-	if err := db.UpdateUserByID(user); err != nil {
+	if err := db.UpdateUserByID(&user); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
@@ -299,7 +299,9 @@ func AnonymizeUserByID(w http.ResponseWriter, r *http.Request) {
 func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	user, err := db.GetUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
+	userID := uuid.MustParse(mux.Vars(r)["user_id"])
+
+	user, err := db.GetUserByID(userID)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		var notFound *models.NotFound
@@ -311,7 +313,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 	var stripeVerification = "identity_document"
 
 	data := url.Values{}
-	data.Set("return_url", os.Getenv("STRIPE_IDENTITY_RETURN_URL"))
+	data.Set("return_url", fmt.Sprintf("/%s/%s", os.Getenv("STRIPE_IDENTITY_RETURN_URL"), userID.String()))
 	data.Set("requested_verifications[0]", stripeVerification)
 
 	client := &http.Client{}
@@ -335,12 +337,14 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(resp.Body).Decode(&stripeIdentityVerificationResponse)
 
 	userVerification := &models.UserVerifications{
-		UserID:           user.ID,
-		StripePersonID:   stripeIdentityVerificationResponse.PersonID,
-		VerificationType: stripeVerification,
+		UserID:                     user.ID,
+		StripeVerificationIntentID: stripeIdentityVerificationResponse.ID,
+		Status:                     stripeIdentityVerificationResponse.Status,
+		StripePersonID:             stripeIdentityVerificationResponse.PersonID,
+		VerificationType:           stripeVerification,
 	}
 
-	if err := db.CreateUserVerification(userVerification); err != nil {
+	if err := db.CreateOrUpdateUserVerification(userVerification); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user verification creation"))

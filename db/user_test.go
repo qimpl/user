@@ -207,18 +207,26 @@ func TestUpdateUserAccountStatus(t *testing.T) {
 	)
 }
 
-func TestCreateUserVerification(t *testing.T) {
+func TestCreateOrUpdateUserVerification(t *testing.T) {
 	assert.NoError(
 		t,
-		CreateUserVerification(&models.UserVerifications{
+		CreateOrUpdateUserVerification(&models.UserVerifications{
 			UserID:           uuid.MustParse("8a76b8db-0490-4ff4-8bdb-dcd18b582c2f"),
 			VerificationType: "identity_card",
 		}),
 	)
 
+	assert.NoError(
+		t,
+		CreateOrUpdateUserVerification(&models.UserVerifications{
+			UserID: uuid.MustParse("8a76b8db-0490-4ff4-8bdb-dcd18b582c2f"),
+			Status: "succeeded",
+		}),
+	)
+
 	assert.EqualError(
 		t,
-		CreateUserVerification(&models.UserVerifications{
+		CreateOrUpdateUserVerification(&models.UserVerifications{
 			VerificationType: "identity_card",
 		}),
 		"ERROR #23502 null value in column \"user_id\" violates not-null constraint",

@@ -93,6 +93,10 @@ func UpdateUserByID(user *models.User) error {
 	notificationPreferences = user.NotificationPreferences
 	_, err = Db.Model(notificationPreferences).Where("user_id = ?", user.ID).Update()
 
+	userVerifications := new(models.UserVerifications)
+	userVerifications = user.UserVerifications
+	_, err = Db.Model(userVerifications).Where("user_id = ?", user.ID).Update()
+
 	return err
 }
 
@@ -134,9 +138,21 @@ func UpdateUserAccountStatus(userID uuid.UUID, state bool) error {
 	return err
 }
 
-// CreateUserVerification create a new entry into user_verification table for a given user.
-func CreateUserVerification(userVerification *models.UserVerifications) error {
-	if _, err := Db.Model(userVerification).Insert(); err != nil {
+// CreateOrUpdateUserVerification create or update a new entry into user_verification table for a given user.
+func CreateOrUpdateUserVerification(userVerifications *models.UserVerifications) error {
+	user, err := GetUserByID(userVerifications.UserID)
+	if err != nil {
+		return err
+	}
+
+	if user.UserVerifications != nil {
+		if _, err := Db.Model(userVerifications).Where("user_id = ?", userVerifications.UserID).Update(); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	if _, err := Db.Model(userVerifications).Insert(); err != nil {
 		return err
 	}
 	return nil
