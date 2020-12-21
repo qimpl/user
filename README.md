@@ -27,3 +27,28 @@ To add verbosity to `go test` command
 ```sh
 $ make test VERBOSE=-v
 ```
+
+## Code Quality
+
+Your commits names should follow the [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional) rules.
+
+Check and fix your code using:
+
+```sh
+$ make coding-style
+```
+
+## Pre-commit
+
+Install pre-commit following the [official documentation](https://pre-commit.com/#installation)
+
+Setup your pre-commit hooks using:
+
+```sh
+# pre-commit hooks
+$ pre-commit install
+# message commit hooks
+$ pre-commit install --hook-type commit-msg
+```
+
+For additional information check [pre-commit docs](https://pre-commit.com)
