@@ -31,6 +31,7 @@ type User struct {
 	StripeCustomerID            string                   `json:"stripe_customer_id,omitempty" pg:"stripe_customer_id" example:"cus_IOwdRp9gIlOjTD"`
 	StripeAccountID             string                   `json:"stripe_account_id,omitempty" pg:"stripe_account_id" example:"acct_1HqMQH2Hlu9RYi7N"`
 	StripePaymentMethodID       string                   `json:"stripe_payment_method_id,omitempty" pg:"stripe_payment_method_id" example:"pm_1Ho8k8CMhQMU3AqAKJwPYAXj"`
+	PushNotificationToken       string                   `json:"push_notification_token,omitempty" example:"ExponentPushToken[pBi7n6HmWKQQEFWkYxw0is]"`
 	CreatedAt                   time.Time                `json:"created_at,omitempty" swaggerignore:"true"`
 	UpdatedAt                   time.Time                `json:"updated_at,omitempty" swaggerignore:"true"`
 	DeletedAt                   time.Time                `json:"deleted_at,omitempty" swaggerignore:"true"`

@@ -32,6 +32,7 @@ CREATE TABLE "users" (
   "stripe_customer_id" varchar(20),
   "stripe_account_id" varchar(25),
   "stripe_payment_method_id" varchar(30),
+  "push_notification_token" varchar(50),
   "created_at" timestamp DEFAULT CURRENT_TIMESTAMP,
   "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP,
   "deleted_at" timestamp
