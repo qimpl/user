@@ -117,6 +117,9 @@ definitions:
       password:
         example: MyPassword
         type: string
+      push_notification_token:
+        example: ExponentPushToken[pBi7n6HmWKQQEFWkYxw0is]
+        type: string
       state:
         example: Haut-De-France
         type: string

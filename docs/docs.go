@@ -756,6 +756,10 @@ var doc = `{
                     "type": "string",
                     "example": "MyPassword"
                 },
+                "push_notification_token": {
+                    "type": "string",
+                    "example": "ExponentPushToken[pBi7n6HmWKQQEFWkYxw0is]"
+                },
                 "state": {
                     "type": "string",
                     "example": "Haut-De-France"
