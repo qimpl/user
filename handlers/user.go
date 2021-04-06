@@ -120,7 +120,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(user)
+	json.NewEncoder(w).Encode(services.CreateJwtToken(user))
 }
 
 // UpdateUserByID update an user from a given ID

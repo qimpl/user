@@ -71,7 +71,14 @@ func CreateUser(user *models.User) (*models.User, error) {
 		return nil, err
 	}
 
+	userVerifications := new(models.UserVerifications)
+	userVerifications.UserID = user.ID
+	if _, err := Db.Model(userVerifications).Returning("*").Insert(); err != nil {
+		return nil, err
+	}
+
 	user.NotificationPreferences = notificationPreferences
+	user.UserVerifications = userVerifications
 	user.Password = ""
 	return user, nil
 }
