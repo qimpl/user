@@ -10,6 +10,9 @@ services:
     volumes:
       - ".:/api"
     entrypoint: ["./entrypoint.sh", "reflex", "-c", "reflex.conf"]
+    depends_on:
+      - db
+      - minio
 
   db:
     container_name: "db-user"
@@ -29,5 +32,16 @@ services:
     image: adminer
     restart: always
 
+  minio:
+    container_name: "minio-user"
+    image: minio/minio
+    volumes:
+      - minio:/data
+    environment:
+      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY_ID}
+      MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_ACCESS_KEY}
+    command: server /data
+
 volumes:
   postgres:
+  minio:

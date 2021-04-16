@@ -9,7 +9,7 @@ import (
 
 // @title authentication API
 // @version 0.1.0
-// @BasePath /api/v1
+// @BasePath /v1
 func main() {
 	router.CreateRouter()
 }

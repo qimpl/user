@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -12,6 +14,7 @@ import (
 	"github.com/qimpl/authentication/db"
 	"github.com/qimpl/authentication/models"
 	"github.com/qimpl/authentication/services"
+	"github.com/qimpl/authentication/storage"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
@@ -52,13 +55,25 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	user, err := db.GetUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
+
+	var badRequest *models.BadRequest
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
 
 		return
 	}
+
+	picture, err := storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", user.ID))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
+
+		return
+	}
+
+	user.ProfilePicture = picture
 
 	json.NewEncoder(w).Encode(user)
 }
@@ -75,14 +90,27 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	partialUser, err := db.GetPartialUserByID(uuid.MustParse(mux.Vars(r)["user_id"]))
+	userUUID := uuid.MustParse(mux.Vars(r)["user_id"])
+	partialUser, err := db.GetPartialUserByID(userUUID)
+
+	var badRequest *models.BadRequest
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
 
 		return
 	}
+
+	picture, err := storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", userUUID))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
+
+		return
+	}
+
+	partialUser.ProfilePicture = picture
 
 	json.NewEncoder(w).Encode(partialUser)
 }
@@ -111,12 +139,28 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user, err := db.CreateUser(&bodyUser)
+
+	var badRequest *models.BadRequest
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user creation"))
 
 		return
+	}
+
+	if user.ProfilePicture != "" {
+		decodedImage, err := base64.StdEncoding.DecodeString(user.ProfilePicture)
+
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during profile picture decoding"))
+
+			return
+		}
+
+		imageReader := bytes.NewReader(decodedImage)
+
+		storage.AddToBucket(fmt.Sprintf("profile_picture_%s.png", user.ID), imageReader, imageReader.Size(), http.DetectContentType(decodedImage))
 	}
 
 	w.WriteHeader(http.StatusCreated)

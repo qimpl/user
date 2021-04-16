@@ -639,6 +639,9 @@ var doc = `{
                 "last_name": {
                     "type": "string",
                     "example": "Martin"
+                },
+                "profile_picture": {
+                    "type": "string"
                 }
             }
         },
@@ -756,6 +759,9 @@ var doc = `{
                     "type": "string",
                     "example": "MyPassword"
                 },
+                "profile_picture": {
+                    "type": "string"
+                },
                 "push_notification_token": {
                     "type": "string",
                     "example": "ExponentPushToken[pBi7n6HmWKQQEFWkYxw0is]"
@@ -859,7 +865,7 @@ type swaggerInfo struct {
 var SwaggerInfo = swaggerInfo{
 	Version:     "0.1.0",
 	Host:        "",
-	BasePath:    "/api/v1",
+	BasePath:    "/v1",
 	Schemes:     []string{},
 	Title:       "authentication API",
 	Description: "",
