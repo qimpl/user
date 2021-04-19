@@ -6,7 +6,7 @@
         "license": {},
         "version": "0.1.0"
     },
-    "basePath": "/api/v1",
+    "basePath": "/v1",
     "paths": {
         "/authenticate": {
             "post": {
@@ -622,6 +622,9 @@
                 "last_name": {
                     "type": "string",
                     "example": "Martin"
+                },
+                "profile_picture": {
+                    "type": "string"
                 }
             }
         },
@@ -738,6 +741,9 @@
                 "password": {
                     "type": "string",
                     "example": "MyPassword"
+                },
+                "profile_picture": {
+                    "type": "string"
                 },
                 "push_notification_token": {
                     "type": "string",

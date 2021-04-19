@@ -23,6 +23,7 @@ type User struct {
 	Zip                         string                   `json:"zip" example:"59000"`
 	IsOwner                     bool                     `json:"is_owner,omitempty" pg:",use_zero" example:"true"`
 	Password                    string                   `json:"password,omitempty" example:"MyPassword"`
+	ProfilePicture              string                   `json:"profile_picture,omitempty" pg:"-"`
 	IsEnabled                   bool                     `json:"is_enabled,omitempty" pg:",use_zero" example:"true"`
 	IsAdmin                     bool                     `json:"is_admin,omitempty" pg:",use_zero" example:"true"`
 	IsDeleted                   bool                     `json:"is_deleted,omitempty" pg:",use_zero" example:"true"`
@@ -39,10 +40,11 @@ type User struct {
 
 // PartialUser contains only non sensible user data return inside a non protected get user API route
 type PartialUser struct {
-	FirstName  string    `json:"first_name" example:"Henri"`
-	LastName   string    `json:"last_name" example:"Martin"`
-	IsVerified bool      `json:"is_verified" pg:",use_zero" example:"true"`
-	CreatedAt  time.Time `json:"created_at" example:"1977-04-22T06:00:00Z"`
+	FirstName      string    `json:"first_name" example:"Henri"`
+	LastName       string    `json:"last_name" example:"Martin"`
+	ProfilePicture string    `json:"profile_picture,omitempty" pg:"-"`
+	IsVerified     bool      `json:"is_verified" pg:",use_zero" example:"true"`
+	CreatedAt      time.Time `json:"created_at" example:"1977-04-22T06:00:00Z"`
 }
 
 //UserLogin contain only user credentials used to authentication

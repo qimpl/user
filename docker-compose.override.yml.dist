@@ -7,4 +7,8 @@ services:
 
   adminer:
     ports:
-     - 8080:8080
+      - 8080:8080
+
+  minio:
+    ports:
+      - 8070:9000

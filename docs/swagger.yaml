@@ -1,4 +1,4 @@
-basePath: /api/v1
+basePath: /v1
 definitions:
   models.ErrorResponse:
     properties:
@@ -34,6 +34,8 @@ definitions:
         type: boolean
       last_name:
         example: Martin
+        type: string
+      profile_picture:
         type: string
     type: object
   models.StripeIdentityVerificationResponse:
@@ -116,6 +118,8 @@ definitions:
         type: object
       password:
         example: MyPassword
+        type: string
+      profile_picture:
         type: string
       push_notification_token:
         example: ExponentPushToken[pBi7n6HmWKQQEFWkYxw0is]
