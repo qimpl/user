@@ -8,6 +8,3 @@ coding-style:
 	go vet ./...
 	goimports -l -w ./
 	golint -set_exit_status ./...
-
-test:
-	./scripts/test.sh
