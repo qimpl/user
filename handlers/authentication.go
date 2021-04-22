@@ -2,7 +2,10 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
+	"time"
 
 	"github.com/qimpl/authentication/models"
 	"github.com/qimpl/authentication/services"
@@ -33,6 +36,7 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	if loginErr != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
+		log.Println(fmt.Sprintf("User - Authenticate - Error - %s : %s", time.Now(), loginErr))
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user authentication"))
 
 		return
