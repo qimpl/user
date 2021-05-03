@@ -65,16 +65,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	picture, err := storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", user.ID))
-
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
-		log.Printf("User - GetUserByID - Bad Request - %s - %s \n", time.Now(), err)
-		return
-	}
-
-	user.ProfilePicture = picture
+	user.ProfilePicture, _ = storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", user.ID))
 
 	json.NewEncoder(w).Encode(user)
 }
@@ -103,16 +94,7 @@ func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	picture, err := storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", userUUID))
-
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
-		log.Printf("User - GetPartialUserByID - Bad Request - %s - %s \n", time.Now(), err)
-		return
-	}
-
-	partialUser.ProfilePicture = picture
+	partialUser.ProfilePicture, _ = storage.GetFromBucket(fmt.Sprintf("profile_picture_%s.png", userUUID))
 
 	json.NewEncoder(w).Encode(partialUser)
 }
