@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -28,7 +27,7 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("Authentication - Authenticate - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -36,9 +35,8 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	if loginErr != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
-		log.Println(fmt.Sprintf("User - Authenticate - Error - %s : %s", time.Now(), loginErr))
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user authentication"))
-
+		log.Printf("Authentication - Authenticate - Bad Request - %s - %s \n", time.Now(), loginErr)
 		return
 	}
 
