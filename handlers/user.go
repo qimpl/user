@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -35,7 +36,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during users retrieval"))
-
+		log.Printf("User - GetAlluser - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -60,7 +61,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
-
+		log.Printf("User - GetUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -69,7 +70,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user retrieval"))
-
+		log.Printf("User - GetUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -98,6 +99,7 @@ func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
 
+		log.Printf("User - GetPartialUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -106,7 +108,7 @@ func GetPartialUserByID(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during partial user retrieval"))
-
+		log.Printf("User - GetPartialUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -134,7 +136,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("User - CreateUser - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -144,7 +146,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user creation"))
-
+		log.Printf("User - CreateUser - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -154,7 +156,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during profile picture decoding"))
-
+			log.Printf("User - CreateUser - Bad Request - %s - %s \n", time.Now(), err)
 			return
 		}
 
@@ -186,7 +188,7 @@ func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("User - UpdateUserByID - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -195,7 +197,7 @@ func UpdateUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
-
+		log.Printf("User - UpdateUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -218,7 +220,7 @@ func DeleteUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user deletion"))
-
+		log.Printf("User - DeleteUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)
@@ -241,7 +243,7 @@ func ResetPassword(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		var unprocessableEntity *models.UnprocessableEntity
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("User - ResetPassword - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -250,7 +252,7 @@ func ResetPassword(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user password reseting"))
-
+		log.Printf("User - ResetPassword - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -271,7 +273,7 @@ func ValidateUserAccount(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user account activation"))
-
+		log.Printf("User - ValidateUserAccount - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -292,7 +294,7 @@ func DeactivateUserAccount(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user account deactivation"))
-
+		log.Printf("User - DeactivateUserAccount - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)
@@ -313,7 +315,7 @@ func AnonymizeUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		var notFound *models.NotFound
 		json.NewEncoder(w).Encode(notFound.GetError("User does not exist"))
-
+		log.Printf("User - AnonymizeUserByID - Not Found - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -324,7 +326,7 @@ func AnonymizeUserByID(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user update"))
-
+		log.Printf("User - AnonymizeUserByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -350,7 +352,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		var notFound *models.NotFound
 		json.NewEncoder(w).Encode(notFound.GetError("User does not exist"))
-
+		log.Printf("User - StripeVerificationIntent - Not Found - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -372,7 +374,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during request building"))
-
+		log.Printf("User - StripeVerificationIntent - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -392,7 +394,7 @@ func StripeVerificationIntent(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		var badRequest *models.BadRequest
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user verification creation"))
-
+		log.Printf("User - StripeVerificationIntent - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 

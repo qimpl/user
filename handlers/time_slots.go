@@ -2,7 +2,9 @@ package handlers
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
@@ -30,7 +32,7 @@ func CreateTimeSlot(w http.ResponseWriter, r *http.Request) {
 		var unprocessableEntity *models.UnprocessableEntity
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("Time_slots - CreateTimeSlot - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -38,7 +40,7 @@ func CreateTimeSlot(w http.ResponseWriter, r *http.Request) {
 		var badRequest *models.BadRequest
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during time slot creation"))
-
+		log.Printf("Time_slots - CreateTimeSlot - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -68,7 +70,7 @@ func UpdateTimeSlotByID(w http.ResponseWriter, r *http.Request) {
 		var unprocessableEntity *models.UnprocessableEntity
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(w).Encode(unprocessableEntity.GetError("Malformed body"))
-
+		log.Printf("Time_slots - UpdateTimeSlotByID - Unprocessable Entity - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -81,7 +83,7 @@ func UpdateTimeSlotByID(w http.ResponseWriter, r *http.Request) {
 		var notFound *models.NotFound
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(notFound.GetError("The given time slot ID doesn't exist"))
-
+		log.Printf("Time_slots - UpdateTimeSlotByID - Not Found - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -92,7 +94,7 @@ func UpdateTimeSlotByID(w http.ResponseWriter, r *http.Request) {
 		var badRequest *models.BadRequest
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during time slot update"))
-
+		log.Printf("Time_slots - UpdateTimeSlotByID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -119,7 +121,7 @@ func GetTimeSlotsByUserID(w http.ResponseWriter, r *http.Request) {
 		var notFound *models.NotFound
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(notFound.GetError("The given user ID doesn't exist"))
-
+		log.Printf("Time_slots - GetTimeSlotsByUserID - Not Found - %s - %s \n", time.Now(), err)
 		return
 	}
 
@@ -129,7 +131,7 @@ func GetTimeSlotsByUserID(w http.ResponseWriter, r *http.Request) {
 		var badRequest *models.BadRequest
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(badRequest.GetError("An error occurred during user time slots retrieval"))
-
+		log.Printf("Time_slots - GetTimeSlotsByUserID - Bad Request - %s - %s \n", time.Now(), err)
 		return
 	}
 
