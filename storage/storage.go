@@ -16,6 +16,7 @@ var minioClient *minio.Client
 var ctx context.Context
 
 func init() {
+	log.Println("Init Minio connection and bucket")
 	ctx = context.Background()
 
 	var err error
@@ -34,7 +35,9 @@ func init() {
 
 	bucketName := os.Getenv("STORAGE_BUCKET_NAME")
 
-	if found, errBucketExists := minioClient.BucketExists(ctx, bucketName); errBucketExists == nil && !found {
+	if found, errBucketExists := minioClient.BucketExists(ctx, bucketName); errBucketExists != nil {
+		log.Fatalln("Storage - Minio Bucket Check Error -", errBucketExists)
+	} else if !found {
 		createBucket(bucketName)
 	}
 }
